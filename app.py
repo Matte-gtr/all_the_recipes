@@ -13,8 +13,14 @@ mongo = PyMongo(app)
 
 
 @app.route("/")
+@app.route("/get_recipes")
 def home_page():
-    return render_template('home_page.html')
+    return render_template('home_page.html', recipes=mongo.db.recipes.find())
+
+
+@app.route('/login')
+def login():
+    return render_template('login.html', methods="POST")
 
 
 if __name__ == "__main__":

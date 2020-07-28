@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+    {% block content %}
+        <div class="row">
+	        <form action="" method="POST">
+		        <div class="row">
+			        <div class="col-sm-12">
+                        <label for="username">Username: </label>
+				        <input id="username" name="username" type="text" class="" placeholder="Dave123@outlook.com"/>
+                    </div>
+			    </div>
+                <div class="row">
+			        <div class="col-sm-12">
+				        <label for="username">Password: </label>
+				        <input id="password" name="password" type="password" class=""/>
+                    </div>
+			    </div>
+                <div class="row">
+                    <button type="submit">Login</button>
+                </div>
+	        </form>
+        </div>
+    {% endblock %}
