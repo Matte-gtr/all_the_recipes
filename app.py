@@ -15,6 +15,12 @@ mongo = PyMongo(app)
 app.secret_key = os.getenv('SECRET_KEY')
 
 
+@app.context_processor
+def get_categories():
+    """ returns a dict of categories to be listed in the navbar """
+    return dict(categories=mongo.db.categories.find())
+
+
 @app.route("/")
 @app.route("/get_recipes")
 def home_page():
@@ -86,7 +92,6 @@ def logout():
     """ logs user out by removing username from session, redirects
     to home page """
     session.pop('username', None)
-    flash('You were logged out')
     return redirect(url_for('home_page'))
 
 

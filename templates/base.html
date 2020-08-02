@@ -31,10 +31,9 @@
 						Categrories
 					</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" href="#">Category 1</a>
-						<a class="dropdown-item" href="#">Category 2</a>
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="#">Category 3</a>
+                    {% for cat in categories %}
+						<a class="dropdown-item" href="#">{{ cat.category_name.capitalize() }}</a>
+					{% endfor %}
 					</div>
 				</li>
 				<li class="nav-item">
