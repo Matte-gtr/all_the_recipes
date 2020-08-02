@@ -1,7 +1,10 @@
 {% extends 'base.html' %}
     {% block content %}
-    <h1>Recipes you might like</h1>
-    {% for recipe in recipes %}
-    <h2>{{ recipe.recipe_name }}</h2>
-    {% endfor %}
+        <h1>Recipes you might like</h1>
+        {% for recipe in recipes %}
+            <h2>{{ recipe.recipe_name }}</h2>
+        {% endfor %}
+        {% if user %}
+        <h2>{{ user.password }}</h2>
+        {% endif %}
     {% endblock %}
