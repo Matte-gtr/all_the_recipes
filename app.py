@@ -28,8 +28,23 @@ def create_account():
 
 @app.route("/insert_account", methods=["POST"])
 def insert_account():
-    
-    return redirect(url_for('home_page'))
+    user = mongo.db.users.find_one({"user_name": request.form.get(
+        'username').lower()})
+    if user:
+        flash('This username is taken')
+        return redirect(url_for('create_account'))
+    else:
+        if request.form.get('password') == \
+                request.form.get('confirm_password'):
+            mongo.db.users.insert_one({
+                "user_name": request.form.get('username').lower(),
+                "email_address": request.form.get('email'),
+                "password": request.form.get('password')
+            })
+        else:
+            flash("Your passwords didn't match")
+            return redirect(url_for('create_account'))
+    return redirect(url_for('user_login'))
 
 
 @app.route("/user_login", methods=["GET", "POST"])
