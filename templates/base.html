@@ -42,7 +42,16 @@
 				</li>
 			</ul>
             {% if session['username'] %}
-                <h4>{{ session['username'] }}</h4>
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="userAccountInfo" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{ session['username'] }}
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </div>
             {% else %}
 			    <div class="btn btn-outline-success my-2 my-sm-0"><a href="{{ url_for('user_login') }}">Login</a></div>
                 <div class="btn btn-outline-success my-2 my-sm-0"><a href="{{ url_for('create_account') }}">Create Account</a></div>
