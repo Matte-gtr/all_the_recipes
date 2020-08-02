@@ -81,6 +81,15 @@ def login():
                             {'user_name': request.form.get('username')}))
 
 
+@app.route('/logout')
+def logout():
+    """ logs user out by removing username from session, redirects
+    to home page """
+    session.pop('username', None)
+    flash('You were logged out')
+    return redirect(url_for('home_page'))
+
+
 if __name__ == "__main__":
     app.run(host=os.getenv("IP"),
             port=int(os.getenv("PORT")),
