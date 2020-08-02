@@ -41,7 +41,11 @@
 					<a class="nav-link disabled" href="#">Disabled</a>
 				</li>
 			</ul>
-			<div class="btn btn-outline-success my-2 my-sm-0"><a href="{{ url_for('user_login') }}">Login</a></div>
+            {% if session['username'] %}
+                <h4>{{ session['username'] }}</h4>
+            {% else %}
+			    <div class="btn btn-outline-success my-2 my-sm-0"><a href="{{ url_for('user_login') }}">Login</a></div>
+            {% endif %}
 		</div>
 	</nav>
 	<div class="container">

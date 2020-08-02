@@ -28,11 +28,12 @@ def user_login():
 
 @app.route('/login', methods=["POST"])
 def login():
-    user = mongo.db.users.find_one({"user_name": request.form.get('username')})
+    user = mongo.db.users.find_one({"user_name": request.form.get(
+        'username').lower()})
     if user:
         if user['password'] == request.form.get('password'):
+            session['username'] = user['user_name']
             return redirect(url_for('home_page'))
-
         else:
             flash('Incorrect password')
             return redirect(url_for('user_login'))
