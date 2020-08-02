@@ -21,12 +21,23 @@ def home_page():
     return render_template('home_page.html', recipes=mongo.db.recipes.find())
 
 
-@app.route('/user_login', methods=["GET", "POST"])
+@app.route("/create_account", methods=["GET", "POST"])
+def create_account():
+    return render_template('create_account.html')
+
+
+@app.route("/insert_account", methods=["POST"])
+def insert_account():
+    
+    return redirect(url_for('home_page'))
+
+
+@app.route("/user_login", methods=["GET", "POST"])
 def user_login():
     return render_template('user_login.html')
 
 
-@app.route('/login', methods=["POST"])
+@app.route("/login", methods=["POST"])
 def login():
     user = mongo.db.users.find_one({"user_name": request.form.get(
         'username').lower()})
