@@ -4,6 +4,7 @@ from flask import Flask, render_template, url_for, session, redirect,\
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 import datetime
+import pymongo
 
 app = Flask(__name__)
 
@@ -13,6 +14,14 @@ app.config["MONGO_URI"] = os.getenv('MONGO_URI')
 mongo = PyMongo(app)
 
 app.secret_key = os.getenv('SECRET_KEY')
+
+
+@app.route("/text_search", methods=["GET", "POST"])
+def text_search():
+    mongo.db.recipes.create_index([('recipe_name', 'text')])
+    results = mongo.db.recipes.find({'$text': {
+            '$search': request.form.get('search')}})
+    return render_template('test.html', results=results)
 
 
 @app.context_processor
