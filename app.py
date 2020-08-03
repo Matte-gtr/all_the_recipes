@@ -18,7 +18,6 @@ app.secret_key = os.getenv('SECRET_KEY')
 
 @app.route("/text_search", methods=["GET", "POST"])
 def text_search():
-    mongo.db.recipes.create_index([('recipe_name', 'text')])
     results = mongo.db.recipes.find({'$text': {
             '$search': request.form.get('search')}})
     return render_template('test.html', results=results)
