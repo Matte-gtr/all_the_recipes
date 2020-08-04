@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
     {% block content %}
+        <form action="{{ url_for('text_search') }}" method="POST">
+            <input type="text" name="search" id="search" placeholder="search" />
+            <button type="submit">Go</button>
+        </form>
         <h1>Recipes you might like</h1>
         {% for recipe in recipes %}
             <h2>{{ recipe.recipe_name }}</h2>

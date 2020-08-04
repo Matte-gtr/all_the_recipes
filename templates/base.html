@@ -34,13 +34,6 @@
                     {% for cat in categories %}
 						<a class="dropdown-item" href="#">{{ cat.category_name.capitalize() }}</a>
 					{% endfor %}
-                    <hr>
-                        <a class="dropdown-item" href="#">
-                            <form action="{{ url_for('text_search') }}" method="POST">
-                                <input type="text" name="search" id="search" placeholder="search" />
-                                <button type="submit">Go</button>
-                            </form>
-                        </a>
 					</div>
 				</li>
 				<li class="nav-item">
@@ -53,7 +46,7 @@
                         {{ session['username'] }}
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="{{ url_for('create_recipe') }}">Create recipe</a>
                         <a class="dropdown-item" href="#">Another action</a>
                         <a class="dropdown-item" href="{{ url_for('logout') }}">Log out</a>
                     </div>

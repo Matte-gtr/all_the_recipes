@@ -109,17 +109,28 @@ def logout():
 
 @app.route('/create_recipe')
 def create_recipe():
-    return render_template('create_recipe.html')
+    return render_template('create_recipe.html',
+                           cats=mongo.db.categories.find())
 
 
 @app.route("/insert_recipe", methods=['POST'])
 def insert_recipe():
     recipes = mongo.db.recipes
+    current_time = datetime.datetime.now().strftime('%X %x')
     recipes.insert_one({
+        'category': request.form.get('category'),
         'recipe_name': request.form.get('recipe_name'),
         'description': request.form.get('description'),
         'ingredients': request.form.getlist('ingredients'),
-        'method': request.form.getlist('method')
+        'method': request.form.getlist('method'),
+        'required_tools': request.form.getlist('tools'),
+        'servings': request.form.get('servings'),
+        'preparation_time': request.form.get('preparation_time'),
+        'cook_time': request.form.get('cook_time'),
+        'image_url': request.form.get("image_url"),
+        'created_on': current_time,
+        'updated_on': current_time,
+        'owner': session['username']
     })
     return redirect(url_for('home_page'))
 
