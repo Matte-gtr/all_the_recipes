@@ -18,24 +18,27 @@ app.secret_key = os.environ.get('SECRET_KEY')
 mongo = PyMongo(app)
 
 
+@app.route("/")
+@app.route("/get_recipes")
+def home_page():
+    """ displays the home page as well as a list of available recipes"""
+    return render_template('home_page.html',
+                           recipes=mongo.db.recipes.find().sort
+                           ('updated_on', pymongo.ASCENDING).limit(10),
+                           header="Check out our latest recipes")
+
+
 @app.route("/text_search", methods=["GET", "POST"])
 def text_search():
     search = request.form.get('search')
-    results = list(mongo.db.recipes.find({'$text': {'$search': search}}))
-    return render_template('test.html', results=results)
+    recipes = list(mongo.db.recipes.find({'$text': {'$search': search}}))
+    return render_template('home_page.html', recipes=recipes)
 
 
 @app.context_processor
 def get_categories():
     """ returns a dict of categories to be listed in the navbar """
     return dict(categories=mongo.db.categories.find())
-
-
-@app.route("/")
-@app.route("/get_recipes")
-def home_page():
-    """ displays the home page as well as a list of available recipes"""
-    return render_template('home_page.html', recipes=mongo.db.recipes.find())
 
 
 @app.route("/create_account", methods=["GET", "POST"])

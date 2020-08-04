@@ -4,7 +4,7 @@
             <input type="text" name="search" id="search" placeholder="search" />
             <button type="submit">Go</button>
         </form>
-        <h1>Recipes you might like</h1>
+        <h3>{{ header }}</h3>
         {% for recipe in recipes %}
             <h2>{{ recipe.recipe_name }}</h2>
         {% endfor %}
