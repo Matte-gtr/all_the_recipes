@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+    {% block content %}
+        <div class="row">
+	        <form action="{{ url_for('insert_recipe') }}" method="POST">
+		        <div class="row">
+			        <div class="col-12">
+                        <label for="recipe_name">Recipe Name: </label>
+				        <input id="recipe_name" name="recipe_name" type="text" class="" required/>
+                    </div>
+			    </div>
+                <div class="row">
+			        <div class="col-12">
+                        <label for="description">Description: </label>
+                        <textarea name="description" id="description"></textarea>
+                    </div>
+			    </div>
+                <div class="row">
+			        <div class="col-12">
+				        <label>Ingredients: </label>
+				        <input id="ingredient[0]" name="ingredients" type="text" class="" />
+                        <input id="ingredient[1]" name="ingredients" type="text" class="" />
+                        <input id="ingredient[2]" name="ingredients" type="text" class="" />
+                    </div>
+			    </div>
+                <div class="row">
+			        <div class="col-12">
+				        <label>Method: </label>
+				        <input id="method[0]" name="method" type="text" class="" />
+                        <input id="method[1]" name="method" type="text" class="" />
+                        <input id="method[2]" name="method" type="text" class="" />
+                    </div>
+			    </div>
+                <div class="row">
+                    <button type="submit">Create recipe</button>
+                </div>
+	        </form>
+        </div>
+        <div class="row">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <ul>
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endwith %}
+        </div>
+    {% endblock %}

@@ -5,21 +5,21 @@ from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 import datetime
 import pymongo
+if os.path.exists("env.py"):
+    import env
 
 app = Flask(__name__)
-
-app.config["MONGO_DBNAME"] = "recipe_website"
-app.config["MONGO_URI"] = os.getenv('MONGO_URI')
-
 mongo = PyMongo(app)
 
-app.secret_key = os.getenv('SECRET_KEY')
+app.config["MONGO_DBNAME"] = os.environ.get("MONGO_DBNAME")
+app.config["MONGO_URI"] = os.getenv('MONGO_URI')
+app.secret_key = os.environ.get('SECRET_KEY')
 
 
 @app.route("/text_search", methods=["GET", "POST"])
 def text_search():
-    results = mongo.db.recipes.find({'$text': {
-            '$search': request.form.get('search')}})
+    search = request.form.get('search')
+    results = list(mongo.db.recipes.find({'$text': {'$search': search}}))
     return render_template('test.html', results=results)
 
 
@@ -103,7 +103,24 @@ def logout():
     return redirect(url_for('home_page'))
 
 
+@app.route('/create_recipe')
+def create_recipe():
+    return render_template('create_recipe.html')
+
+
+@app.route("/insert_recipe", methods=['POST'])
+def insert_recipe():
+    recipes = mongo.db.recipes
+    recipes.insert_one({
+        'recipe_name': request.form.get('recipe_name'),
+        'description': request.form.get('description'),
+        'ingredients': request.form.getlist('ingredients'),
+        'method': request.form.getlist('method')
+    })
+    return redirect(url_for('home_page'))
+
+
 if __name__ == "__main__":
-    app.run(host=os.getenv("IP"),
-            port=int(os.getenv("PORT")),
+    app.run(host=os.environ.get("IP"),
+            port=int(os.environ.get("PORT")),
             debug=True)
