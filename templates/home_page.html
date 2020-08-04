@@ -7,6 +7,7 @@
         <h3>{{ header }}</h3>
         {% for recipe in recipes %}
             <h2>{{ recipe.recipe_name }}</h2>
+            <a href="{{ url_for('view_recipe', recipe_id=recipe._id) }}"><button type="button" class="btn btn-primary btn-sm">View</button></a>
         {% endfor %}
         {% if user %}
         <h2>{{ user.password }}</h2>

@@ -138,6 +138,13 @@ def insert_recipe():
     return redirect(url_for('home_page'))
 
 
+@app.route('/view_recipe/<recipe_id>')
+def view_recipe(recipe_id):
+    return render_template('view_recipe.html',
+                    recipe=mongo.db.recipes.find_one({
+                        '_id': ObjectId(recipe_id)}))
+
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
