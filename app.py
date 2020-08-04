@@ -5,15 +5,17 @@ from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 import datetime
 import pymongo
+from werkzeug.security import generate_password_hash, check_password_hash
 if os.path.exists("env.py"):
     import env
 
 app = Flask(__name__)
-mongo = PyMongo(app)
 
 app.config["MONGO_DBNAME"] = os.environ.get("MONGO_DBNAME")
 app.config["MONGO_URI"] = os.getenv('MONGO_URI')
 app.secret_key = os.environ.get('SECRET_KEY')
+
+mongo = PyMongo(app)
 
 
 @app.route("/text_search", methods=["GET", "POST"])
@@ -47,9 +49,9 @@ def insert_account():
     """ (from "create_account" submit) checks if the username is already in the
 database and if the double entered passwords match, if the username is not
 taken and the passwords match, a new user is created in the database """
-    user = mongo.db.users.find_one({"user_name": request.form.get(
+    existing_user = mongo.db.users.find_one({"user_name": request.form.get(
         'username').lower()})
-    if user:
+    if existing_user:
         flash('This username is taken')
         return redirect(url_for('create_account'))
     else:
@@ -58,9 +60,10 @@ taken and the passwords match, a new user is created in the database """
             mongo.db.users.insert_one({
                 "user_name": request.form.get('username').lower(),
                 "email_address": request.form.get('email'),
-                "password": request.form.get('password')
+                "password": generate_password_hash(
+                        request.form.get('password'))
             })
-            flash("account created")
+            flash("Account Created")
         else:
             flash("Your passwords didn't match")
             return redirect(url_for('create_account'))
@@ -79,11 +82,12 @@ def login():
     database and if so, that the passwords match, if the username is present
     and the passwords match, the user is logged in by way of storing the
     username in session """
-    user = mongo.db.users.find_one({"user_name": request.form.get(
+    existing_user = mongo.db.users.find_one({"user_name": request.form.get(
         'username').lower()})
-    if user:
-        if user['password'] == request.form.get('password'):
-            session['username'] = user['user_name']
+    if existing_user:
+        if check_password_hash(existing_user["password"],
+                               request.form.get("password")):
+            session['username'] = existing_user['user_name']
             return redirect(url_for('home_page'))
         else:
             flash('Incorrect password')

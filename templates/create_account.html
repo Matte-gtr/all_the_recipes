@@ -5,7 +5,7 @@
 		        <div class="row">
 			        <div class="col-12">
                         <label for="username">Username: </label>
-				        <input id="username" name="username" type="text" class="" placeholder="DaveSmith123" required/>
+				        <input id="username" name="username" type="text" class="" placeholder="DaveSmith123" pattern="^[a-zA-Z0-9]{5, 15}$" required/>
                     </div>
 			    </div>
                 <div class="row">
@@ -17,13 +17,13 @@
                 <div class="row">
 			        <div class="col-12">
 				        <label for="password">Password: </label>
-				        <input id="password" name="password" type="password" class="" required/>
+				        <input id="password" name="password" type="password" class="" minlength="5" maxlength="15" required/>
                     </div>
 			    </div>
                 <div class="row">
 			        <div class="col-12">
 				        <label for="confirm_password">Confirm Password: </label>
-				        <input id="confirm_password" name="confirm_password" type="password" class="" required/>
+				        <input id="confirm_password" name="confirm_password" type="password" class="" minlength="5" maxlength="15" required/>
                     </div>
 			    </div>
                 <div class="row">
