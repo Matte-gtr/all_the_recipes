@@ -138,11 +138,17 @@ def insert_recipe():
     return redirect(url_for('home_page'))
 
 
+@app.route('/recipes_by_category/<category>')
+def recipes_by_category(category):
+    recipes = mongo.db.recipes.find({'category': category})
+    return render_template('home_page.html', recipes=recipes)
+
+
 @app.route('/view_recipe/<recipe_id>')
 def view_recipe(recipe_id):
     return render_template('view_recipe.html',
-                    recipe=mongo.db.recipes.find_one({
-                        '_id': ObjectId(recipe_id)}))
+                           recipe=mongo.db.recipes.find_one({
+                            '_id': ObjectId(recipe_id)}))
 
 
 if __name__ == "__main__":

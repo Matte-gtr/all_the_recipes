@@ -32,7 +32,7 @@
 					</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     {% for cat in categories %}
-						<a class="dropdown-item" href="#">{{ cat.category_name.capitalize() }}</a>
+						<a class="dropdown-item" href="{{ url_for('recipes_by_category', category=cat.category_name) }}">{{ cat.category_name.capitalize() }}</a>
 					{% endfor %}
 					</div>
 				</li>
