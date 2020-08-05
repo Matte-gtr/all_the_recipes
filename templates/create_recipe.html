@@ -31,27 +31,30 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-12">
-        <label>Ingredients: </label>
-        <input id="ingredients[0]" name="ingredients" type="text" class="" />
-        <input id="ingredients[1]" name="ingredients" type="text" class="" />
-        <input id="ingredients[2]" name="ingredients" type="text" class="" />
+      <div class="col-12" id="ingredient-wrapper">
+        <label>Ingredients: </label> <button type="button" class="btn btn-primary btn-sm add-ingredient">Add ingredient</button>
+        <div>
+            <input name="ingredients" type="text" class="" />
+            <button type="button" class="btn btn-outline-primary btn-sm remove-ingredient">-</button>
+        </div>
       </div>
     </div>
     <div class="row">
-      <div class="col-12">
-        <label>Method: </label>
-        <input id="method[0]" name="method" type="text" class="" />
-        <input id="method[1]" name="method" type="text" class="" />
-        <input id="method[2]" name="method" type="text" class="" />
+      <div class="col-12" id="method-wrapper">
+        <label>Method: </label> <button type="button" class="btn btn-primary btn-sm add-method">Add Method Step</button>
+        <div>
+            <input name="method" type="text" class="" />
+            <button type="button" class="btn btn-outline-primary btn-sm remove-method">-</button>
+        </div>
       </div>
     </div>
     <div class="row">
-      <div class="col-12">
-        <label>Required Tools: </label>
-        <input id="tool[0]" name="tools" type="text" class="" />
-        <input id="tool[1]" name="tools" type="text" class="" />
-        <input id="tool[2]" name="tools" type="text" class="" />
+      <div class="col-12" id="tools-wrapper">
+        <label>Required Tools: </label> <button type="button" class="btn btn-primary btn-sm add-tool">Add Method Step</button>
+        <div>
+            <input name="tools" type="text" class="" />
+            <button type="button" class="btn btn-outline-primary btn-sm remove-tool">-</button>
+        </div>
       </div>
     </div>
     <div class="row">

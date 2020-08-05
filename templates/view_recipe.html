@@ -6,4 +6,8 @@
         <div class="row">
             <h3>{{ recipe.recipe_name }}</h3>
         </div>
+        {% if recipe.owner == session['username'] %}
+            <a class="btn btn-primary" href="#" role="button">Edit</a>
+            <a class="btn btn-primary" href="#" role="button">Delete</a>
+        {% endif %}
     {% endblock %}

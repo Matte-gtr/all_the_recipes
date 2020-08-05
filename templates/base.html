@@ -47,7 +47,7 @@
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" href="{{ url_for('create_recipe') }}">Create recipe</a>
-                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">My recipes</a>
                         <a class="dropdown-item" href="{{ url_for('logout') }}">Log out</a>
                     </div>
                 </div>
@@ -72,6 +72,8 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
 		integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
 	</script>
+    <script src="{{ url_for('static', filename='js/script.js') }}">
+    </script>
 </body>
 
 </html>
