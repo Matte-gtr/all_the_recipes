@@ -1,13 +1,17 @@
 {% extends 'base.html' %} {% block content %}
 <div class="row">
-  <form action="{{ url_for('insert_recipe') }}" method="POST">
+  <form action="{{ url_for('update_recipe', recipe_id=recipe._id) }}" method="POST">
     <div class="row">
       <div class="col-12">
         <label for="category">Choose Category: </label>
         <select id="category" name="category" class="">
           <option value="" disabled selected>Choose Category</option>
           {% for cat in cats %}
-          <option value="{{ cat.category_name }}">{{ cat.category_name.capitalize() }}</option>
+            {% if cat.category_name == recipe.category %}
+                <option value="{{ cat.category_name }}" selected>{{ cat.category_name.capitalize() }}</option>
+            {% else %}
+                <option value="{{ cat.category_name }}">{{ cat.category_name.capitalize() }}</option>
+            {% endif %}
           {% endfor %}
         </select>
       </div>
@@ -20,6 +24,7 @@
           name="recipe_name"
           type="text"
           class=""
+          value="{{ recipe.recipe_name }}"
           required
         />
       </div>
@@ -27,40 +32,46 @@
     <div class="row">
       <div class="col-12">
         <label for="description">Description: </label>
-        <textarea name="description" id="description"></textarea>
+        <textarea name="description" id="description">{{ recipe.description }}</textarea>
       </div>
     </div>
     <div class="row">
       <div class="col-12" id="ingredient-wrapper">
         <label>Ingredients: </label> <button type="button" class="btn btn-primary btn-sm add-ingredient">Add ingredient</button>
+        {% for ingredient in recipe.ingredients %}
         <div>
-            <input name="ingredients" type="text" class="" />
+            <input name="ingredients" type="text" class="" value="{{ ingredient }}" />
             <button type="button" class="btn btn-outline-primary btn-sm remove-ingredient">-</button>
         </div>
+        {% endfor %}
       </div>
     </div>
     <div class="row">
       <div class="col-12" id="method-wrapper">
         <label>Method: </label> <button type="button" class="btn btn-primary btn-sm add-method">Add Method Step</button>
+        {% for step in recipe.method %}
         <div>
-            <input name="method" type="text" class="" />
+            <input name="method" type="text" class="" value="{{ step }}"/>
             <button type="button" class="btn btn-outline-primary btn-sm remove-method">-</button>
         </div>
+        {% endfor %}
       </div>
     </div>
     <div class="row">
       <div class="col-12" id="tools-wrapper">
         <label>Required Tools: </label> <button type="button" class="btn btn-primary btn-sm add-tool">Add Tool</button>
+        {% for tool in recipe.required_tools %}
         <div>
-            <input name="tools" type="text" class="" />
+            <input name="tools" type="text" class="" value="{{ tool }}"/>
             <button type="button" class="btn btn-outline-primary btn-sm remove-tool">-</button>
         </div>
+        {% endfor %}
       </div>
     </div>
     <div class="row">
       <div class="col-12">
         <label for="servings">Servings: </label>
-        <input id="servings" name="servings" type="text" class="" />
+        <input id="servings" name="servings" type="text" class="" value="{{ recipe.servings }}"/>
       </div>
     </div>
     <div class="row">
@@ -71,23 +82,24 @@
           name="preparation_time"
           type="text"
           class=""
+          value="{{ recipe.preparation_time }}"
         />
       </div>
     </div>
     <div class="row">
       <div class="col-12">
         <label for="cook_time">Cook Time: </label>
-        <input id="cook_time" name="cook_time" type="text" class="" />
+        <input id="cook_time" name="cook_time" type="text" class="" value="{{ recipe.cook_time }}"/>
       </div>
     </div>
     <div class="row">
       <div class="col-12">
         <label for="image_url">Image URL: </label>
-        <input id="image_url" name="image_url" type="text" class="" />
+        <input id="image_url" name="image_url" type="text" class=""  value="{{ recipe.image_url }}"/>
       </div>
     </div>
     <div class="row">
-      <button type="submit">Create recipe</button>
+      <button type="submit">Update recipe</button>
     </div>
   </form>
 </div>

@@ -151,6 +151,37 @@ def view_recipe(recipe_id):
                             '_id': ObjectId(recipe_id)}))
 
 
+@app.route('/edit_recipe/<recipe_id>')
+def edit_recipe(recipe_id):
+    return render_template('edit_recipe.html',
+                           recipe=mongo.db.recipes.find_one({
+                            '_id': ObjectId(recipe_id)}),
+                           cats=mongo.db.categories.find())
+
+
+@app.route('/update_recipe/<recipe_id>', methods=["POST"])
+def update_recipe(recipe_id):
+    current_time = datetime.datetime.now().strftime('%X %x')
+    mongo.db.recipes.update({'_id': ObjectId(recipe_id)},
+                            {'$set': {
+                                'category': request.form.get('category'),
+                                'recipe_name': request.form.get('recipe_name'),
+                                'description': request.form.get('description'),
+                                'ingredients': request.form.getlist(
+                                    'ingredients'),
+                                'method': request.form.getlist('method'),
+                                'required_tools': request.form.getlist(
+                                    'tools'),
+                                'servings': request.form.get('servings'),
+                                'preparation_time': request.form.get(
+                                    'preparation_time'),
+                                'cook_time': request.form.get('cook_time'),
+                                'image_url': request.form.get("image_url"),
+                                'updated_on': current_time,
+                            }})
+    return redirect(url_for('view_recipe', recipe_id=recipe_id))
+
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
