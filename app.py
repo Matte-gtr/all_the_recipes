@@ -139,8 +139,18 @@ def insert_recipe():
 
 @app.route('/recipes_by_category/<category>')
 def recipes_by_category(category):
-    recipes = mongo.db.recipes.find({'category': category})
-    return render_template('home_page.html', recipes=recipes)
+    recipes = mongo.db.recipes.find({'category': category}).sort(
+        'updated_on', pymongo.ASCENDING)
+    return render_template('home_page.html', recipes=recipes,
+                           header="All " + category.capitalize() + " Recipes")
+
+
+@app.route('/user_recipes/<owner>')
+def user_recipes(owner):
+    recipes = mongo.db.recipes.find({'owner': session['username']}).sort(
+        'updated_on', pymongo.ASCENDING)
+    return render_template('home_page.html', recipes=recipes,
+                           header="All " + owner.capitalize() + " Recipes")
 
 
 @app.route('/view_recipe/<recipe_id>')
