@@ -6,8 +6,7 @@ from bson.objectid import ObjectId
 import datetime
 import pymongo
 from werkzeug.security import generate_password_hash, check_password_hash
-if os.path.exists("env.py"):
-    import env
+
 
 app = Flask(__name__)
 

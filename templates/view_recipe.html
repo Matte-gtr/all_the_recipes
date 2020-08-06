@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
     {% block content %}
         <div class="row">
-            <img src="{{ recipe.image_url }}">
+            <img src="{{ recipe.image_url }}" onerror="this.src='/static/images/ATR-default.jpg'">
         </div>
         <div class="row">
             <h3>{{ recipe.recipe_name }}</h3>
