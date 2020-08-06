@@ -22,8 +22,8 @@ mongo = PyMongo(app)
 def home_page():
     """ displays the home page as well as a list of available recipes"""
     return render_template('home_page.html',
-                           recipes=mongo.db.recipes.find().sort
-                           ('updated_on', pymongo.ASCENDING),
+                           recipes=list(mongo.db.recipes.find().sort(
+                               'updated_on', pymongo.ASCENDING)),
                            header="Check out our latest recipes")
 
 
@@ -37,7 +37,7 @@ def text_search():
     search = request.form.get('search')
     recipes = list(mongo.db.recipes.find({'$text': {'$search': search}}))
     return render_template('home_page.html', recipes=recipes,
-                           errmsg='No recipes match the search "'
+                           error_message='No recipes match the search "'
                            + search + '"')
 
 
@@ -146,18 +146,22 @@ def insert_recipe():
 
 @app.route('/recipes_by_category/<category>')
 def recipes_by_category(category):
-    recipes = mongo.db.recipes.find({'category': category}).sort(
-        'updated_on', pymongo.ASCENDING)
+    recipes = list(mongo.db.recipes.find({'category': category}).sort(
+        'updated_on', pymongo.ASCENDING))
     return render_template('home_page.html', recipes=recipes,
-                           header="All " + category.capitalize() + " Recipes")
+                           header="All " + category.capitalize() + " Recipes",
+                           error_message="No results for "
+                           + category.capitalize())
 
 
 @app.route('/user_recipes/<owner>')
 def user_recipes(owner):
-    recipes = mongo.db.recipes.find({'owner': session['username']}).sort(
-        'updated_on', pymongo.ASCENDING)
+    recipes = list(mongo.db.recipes.find({'owner': session['username']}).sort(
+        'updated_on', pymongo.ASCENDING))
     return render_template('home_page.html', recipes=recipes,
-                           header="All " + owner.capitalize() + " Recipes")
+                           header="All " + owner.capitalize() + " Recipes",
+                           error_message=owner.capitalize()
+                           + " currently has no recipes")
 
 
 @app.route('/view_recipe/<recipe_id>')
