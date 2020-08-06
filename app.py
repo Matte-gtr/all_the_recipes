@@ -23,15 +23,22 @@ def home_page():
     """ displays the home page as well as a list of available recipes"""
     return render_template('home_page.html',
                            recipes=mongo.db.recipes.find().sort
-                           ('updated_on', pymongo.ASCENDING).limit(10),
+                           ('updated_on', pymongo.ASCENDING),
                            header="Check out our latest recipes")
+
+
+@app.route("/about")
+def about():
+    return render_template('about.html')
 
 
 @app.route("/text_search", methods=["GET", "POST"])
 def text_search():
     search = request.form.get('search')
     recipes = list(mongo.db.recipes.find({'$text': {'$search': search}}))
-    return render_template('home_page.html', recipes=recipes)
+    return render_template('home_page.html', recipes=recipes,
+                           errmsg='No recipes match the search "'
+                           + search + '"')
 
 
 @app.context_processor
