@@ -118,12 +118,18 @@ def logout():
 
 @app.route('/create_recipe')
 def create_recipe():
+    """ opens the create recipe page with all the
+    input fields to create a new recipe """
     return render_template('create_recipe.html',
                            cats=mongo.db.categories.find())
 
 
 @app.route("/insert_recipe", methods=['POST'])
 def insert_recipe():
+    """ takes the data from the create_recipe form and creates
+    a new doument in the recipes collection to store the data
+    (along with the time/date the recipe was created and last edited),
+    then redirects the user back to the home page """
     recipes = mongo.db.recipes
     current_time = datetime.datetime.now().strftime('%X %x')
     recipes.insert_one({
@@ -146,6 +152,8 @@ def insert_recipe():
 
 @app.route('/recipes_by_category/<category>')
 def recipes_by_category(category):
+    """ searches for all recipes with a chosen category from a drop down list,
+    then displays those recipes on the home page """
     recipes = list(mongo.db.recipes.find({'category': category}).sort(
         'updated_on', pymongo.ASCENDING))
     return render_template('home_page.html', recipes=recipes,
@@ -156,6 +164,8 @@ def recipes_by_category(category):
 
 @app.route('/user_recipes/<owner>')
 def user_recipes(owner):
+    """ displays a list of all the recipes created by the current user,
+    using the session['username'] variable """
     recipes = list(mongo.db.recipes.find({'owner': session['username']}).sort(
         'updated_on', pymongo.ASCENDING))
     return render_template('home_page.html', recipes=recipes,
@@ -166,6 +176,8 @@ def user_recipes(owner):
 
 @app.route('/view_recipe/<recipe_id>')
 def view_recipe(recipe_id):
+    """ generates a display of all the information
+    related to a particular recipe based on the recipe_id"""
     return render_template('view_recipe.html',
                            recipe=mongo.db.recipes.find_one({
                             '_id': ObjectId(recipe_id)}))
@@ -173,6 +185,10 @@ def view_recipe(recipe_id):
 
 @app.route('/edit_recipe/<recipe_id>')
 def edit_recipe(recipe_id):
+    """ displays a form similar to the create_recipe page,
+    that is pre-filled with the data from the chosen recipe,
+    allowing the user to edit and save the changes
+    (this is only visible to the user that created the recipe) """
     return render_template('edit_recipe.html',
                            recipe=mongo.db.recipes.find_one({
                             '_id': ObjectId(recipe_id)}),
@@ -181,6 +197,9 @@ def edit_recipe(recipe_id):
 
 @app.route('/update_recipe/<recipe_id>', methods=["POST"])
 def update_recipe(recipe_id):
+    """ updates a recipe using recipe_id based on the information input into the
+    edit_recipe page. The owner and created on fields are not updated and the
+    updated_on field is automatically updated """
     current_time = datetime.datetime.now().strftime('%X %x')
     mongo.db.recipes.update({'_id': ObjectId(recipe_id)},
                             {'$set': {
