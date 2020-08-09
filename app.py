@@ -1,10 +1,10 @@
 import os
+import pymongo
+import datetime
 from flask import Flask, render_template, url_for, session, redirect,\
     flash, request
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
-import datetime
-import pymongo
 from werkzeug.security import generate_password_hash, check_password_hash
 
 
@@ -32,7 +32,7 @@ def about():
     return render_template('about.html')
 
 
-@app.route("/text_search", methods=["GET", "POST"])
+@app.route("/recipes/search", methods=["GET", "POST"])
 def text_search():
     search = request.form.get('search')
     recipes = list(mongo.db.recipes.find({'$text': {'$search': search}}))
@@ -47,13 +47,13 @@ def get_categories():
     return dict(categories=mongo.db.categories.find())
 
 
-@app.route("/create_account", methods=["GET", "POST"])
+@app.route("/user/create_account", methods=["GET"])
 def create_account():
     """ displays the create account page/form """
     return render_template('create_account.html')
 
 
-@app.route("/insert_account", methods=["POST"])
+@app.route("/user/create_account/post", methods=["POST"])
 def insert_account():
     """ (from "create_account" submit) checks if the username is already in the
 database and if the double entered passwords match, if the username is not
@@ -73,24 +73,23 @@ taken and the passwords match, a new user is created in the database """
                         request.form.get('password'))
             })
             flash("Account Created")
+            return redirect(url_for('user_login'))
         else:
             flash("Your passwords didn't match")
             return redirect(url_for('create_account'))
-    return redirect(url_for('user_login'))
 
 
-@app.route("/user_login", methods=["GET", "POST"])
+@app.route("/user/login", methods=["GET", "POST"])
 def user_login():
     """ displays the login page/form """
     return render_template('user_login.html')
 
 
-@app.route("/login", methods=["POST"])
+@app.route("/user/login/post", methods=["POST"])
 def login():
     """ (from "user_login" submit) checks if the username is in the
     database and if so, that the passwords match, if the username is present
-    and the passwords match, the user is logged in by way of storing the
-    username in session """
+    and the passwords match, the user is logged in """
     existing_user = mongo.db.users.find_one({"user_name": request.form.get(
         'username').lower()})
     if existing_user:
@@ -108,7 +107,7 @@ def login():
                             {'user_name': request.form.get('username')}))
 
 
-@app.route('/logout')
+@app.route('/user/logout')
 def logout():
     """ logs user out by removing username from session, redirects
     to home page """
@@ -116,7 +115,7 @@ def logout():
     return redirect(url_for('home_page'))
 
 
-@app.route('/create_recipe')
+@app.route('/recipes/create_recipe')
 def create_recipe():
     """ opens the create recipe page with all the
     input fields to create a new recipe """
@@ -124,7 +123,7 @@ def create_recipe():
                            cats=mongo.db.categories.find())
 
 
-@app.route("/insert_recipe", methods=['POST'])
+@app.route("/recipes/create_recipe/post", methods=['POST'])
 def insert_recipe():
     """ takes the data from the create_recipe form and creates
     a new doument in the recipes collection to store the data
@@ -150,7 +149,7 @@ def insert_recipe():
     return redirect(url_for('home_page'))
 
 
-@app.route('/recipes_by_category/<category>')
+@app.route('/recipes/search/<category>')
 def recipes_by_category(category):
     """ searches for all recipes with a chosen category from a drop down list,
     then displays those recipes on the home page """
@@ -162,7 +161,7 @@ def recipes_by_category(category):
                            + category.capitalize())
 
 
-@app.route('/user_recipes/<owner>')
+@app.route('/recipes/search/<owner>')
 def user_recipes(owner):
     """ displays a list of all the recipes created by the current user,
     using the session['username'] variable """
@@ -174,7 +173,7 @@ def user_recipes(owner):
                            + " currently has no recipes")
 
 
-@app.route('/view_recipe/<recipe_id>')
+@app.route('/recipes/view_recipe/<recipe_id>')
 def view_recipe(recipe_id):
     """ generates a display of all the information
     related to a particular recipe based on the recipe_id"""
@@ -183,7 +182,7 @@ def view_recipe(recipe_id):
                             '_id': ObjectId(recipe_id)}))
 
 
-@app.route('/edit_recipe/<recipe_id>')
+@app.route('/recipes/edit_recipe/<recipe_id>')
 def edit_recipe(recipe_id):
     """ displays a form similar to the create_recipe page,
     that is pre-filled with the data from the chosen recipe,
@@ -195,7 +194,7 @@ def edit_recipe(recipe_id):
                            cats=mongo.db.categories.find())
 
 
-@app.route('/update_recipe/<recipe_id>', methods=["POST"])
+@app.route('/recipes/update_recipe/<recipe_id>', methods=["POST"])
 def update_recipe(recipe_id):
     """ updates a recipe using recipe_id based on the information input into the
     edit_recipe page. The owner and created on fields are not updated and the
