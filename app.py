@@ -52,15 +52,19 @@ def about():
 
 @app.route("/recipes/search", methods=["GET", "POST"])
 def text_search():
-    page, per_page, offset, search = pagination_vars()
+    page = request.args.get(get_page_parameter(), type=int, default=1)
+    per_page = 10
+    offset = (page - 1) * per_page
+    searchit = False
+    q = request.args.get('q')
+    if q:
+        searchit = True
     search = request.form.get('search')
     recipes = mongo.db.recipes.find({'$text': {'$search': search}}).limit(
         per_page).skip(offset)
-    total = int()
-    mongo.db.recipes.aggregate([
-        {'$text': {'$search': search}}, {'$count': total}])
-    pagination = Pagination(page=page, total=total, search=search,
-                            record_name='recipes', offset=offset)
+    pagination = Pagination(page=page, total=recipes.count(), search=searchit,
+                            record_name='recipe_results', offset=offset)
+    print(pagination)
     return render_template('home_page.html', recipes=list(recipes),
                            error_message='No recipes match the search "'
                            + search + '"', pagination=pagination)
