@@ -54,6 +54,15 @@
             {% endif %}
 		</div>
 	</nav>
+    <div class="container-fluid" id="search-bar">
+        <div class="row">
+            <form action="{{ url_for('text_search') }}" method="POST">
+                <input type="text" name="search" id="search" placeholder="search" />
+                <button type="submit" class="btn btn-primary">Go</button>
+                <a href="{{ url_for('home_page') }}" class="btn btn-warning">Clear</a>
+            </form>
+        </div>
+    </div>
 	<div class="container">
 
 		{% block content %}
