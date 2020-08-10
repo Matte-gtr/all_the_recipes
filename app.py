@@ -63,11 +63,11 @@ def text_search():
     recipes = mongo.db.recipes.find({'$text': {'$search': search}}).limit(
         per_page).skip(offset)
     pagination = Pagination(page=page, total=recipes.count(), search=searchit,
-                            record_name='recipe_results', offset=offset)
+                            record_name='recipes', offset=offset)
     print(pagination)
     return render_template('home_page.html', recipes=list(recipes),
-                           error_message='No recipes match the search "'
-                           + search + '"', pagination=pagination)
+                           error_message=f'No recipes match the \
+                               search "{search}"', pagination=pagination)
 
 
 @app.context_processor
@@ -108,7 +108,7 @@ taken and the passwords match, a new user is created in the database """
             return redirect(url_for('create_account'))
 
 
-@app.route("/user/login", methods=["GET", "POST"])
+@app.route("/user/login", methods=["GET"])
 def user_login():
     """ displays the login page/form """
     return render_template('user_login.html')
@@ -141,7 +141,8 @@ def logout():
     """ logs user out by removing username from session, redirects
     to home page """
     session.pop('username', None)
-    return redirect(url_for('home_page'))
+    next_url = request.args.get('next', request.referrer)
+    return next_url
 
 
 @app.route('/recipes/create_recipe')
@@ -189,8 +190,8 @@ def recipes_by_category(category):
                             record_name='recipes', offset=offset)
     return render_template('home_page.html', recipes=list(recipes),
                            header="All " + category.capitalize() + " Recipes",
-                           error_message="No results for "
-                           + category.capitalize(), pagination=pagination)
+                           error_message=f"No results for \
+                           {category.capitalize()}", pagination=pagination)
 
 
 @app.route('/recipes/search/<owner>')
@@ -204,8 +205,8 @@ def user_recipes(owner):
                             record_name='recipes', offset=offset)
     return render_template('home_page.html', recipes=list(recipes),
                            header="All " + owner.capitalize() + " Recipes",
-                           error_message=owner.capitalize()
-                           + " currently has no recipes",
+                           error_message=f"{owner.capitalize()}\
+                            currently has no recipes",
                            pagination=pagination)
 
 
