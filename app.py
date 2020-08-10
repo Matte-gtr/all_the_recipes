@@ -67,7 +67,8 @@ def text_search():
     print(pagination)
     return render_template('home_page.html', recipes=list(recipes),
                            error_message=f'No recipes match the \
-                               search "{search}"', pagination=pagination)
+                               search "{search}"', pagination=pagination,
+                           header=f"Recipes containing {search}")
 
 
 @app.context_processor

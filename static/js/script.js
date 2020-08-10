@@ -28,4 +28,8 @@ $(document).ready(function(){
         $(this).parent('div').remove();
     });
 
+    $('#search-bar-show').click(function() {
+        $('#search-bar').slideToggle();
+    });
+
 });
