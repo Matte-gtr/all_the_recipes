@@ -28,8 +28,11 @@ $(document).ready(function(){
         $(this).parent('div').remove();
     });
 
-    $('#search-bar-show').click(function() {
-        $('#search-bar').slideToggle();
+    $('#search-button').click(function() {
+        if ($('#search-container').hasClass('search-hide')) {
+            $('#search-container').removeClass('search-hide').addClass('search-show')}
+        else {
+            $('#search-container').addClass('search-hide').removeClass('search-show')}
     });
 
 });

@@ -1,0 +1,55 @@
+/*-----------------nav bar & search bar-----------------*/
+
+.center {
+    text-align: center;
+    margin: 0 auto;
+}
+
+#search-container {
+    width: 80%;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    overflow: hidden;
+}
+
+.search-show {
+    height: 60px;
+}
+
+.search-hide {
+    height: 60px;
+}
+
+#search-field .form-control {
+    display: inline-block;
+}
+
+#search {
+    padding-right: 50px;
+    width: 99%;
+    margin: 13px 0;
+}
+
+.search-go {
+    margin-left: -50px;
+    width: 50px;
+    border-radius: 12%;
+    margin-bottom: 5px;
+}
+
+.search-button {
+    display: none;
+}
+
+/*-----------------media queries-----------------*/
+
+@media (min-width: 768px) {
+    .search-hide {
+    height: 0px;
+    }
+    .search-button {
+    display: inline-block;
+}
+}

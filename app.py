@@ -142,8 +142,7 @@ def logout():
     """ logs user out by removing username from session, redirects
     to home page """
     session.pop('username', None)
-    next_url = request.args.get('next', request.referrer)
-    return next_url
+    return redirect(url_for('home_page'))
 
 
 @app.route('/recipes/create_recipe')
