@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap');
+
 /*-----------------general/re-usable styles-----------------*/
 
 .center {
@@ -42,7 +44,20 @@
     font-weight: 500;
 }
 
+.site-logo {
+    font-family: 'Rock Salt', cursive;
+    font-size: 23px;
+    text-shadow: 2px 2px 2px #2f2f2f;
+    color: #fb840a;
+}
+
 /*-----------------nav bar & search bar-----------------*/
+
+#site-banner {
+    width: 20px;
+    height: 15px;
+
+}
 
 #search-container {
     -webkit-transition: all 0.5s ease;
