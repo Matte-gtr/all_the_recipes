@@ -30,9 +30,12 @@ $(document).ready(function(){
 
     $('#search-button').click(function() {
         if ($('#search-container').hasClass('search-hide')) {
-            $('#search-container').removeClass('search-hide').addClass('search-show')}
-        else {
-            $('#search-container').addClass('search-hide').removeClass('search-show')}
-    });
+            $('#search-container').removeClass('search-hide').addClass('search-show');
+            document.cookie = "visible=true";
+        } else {
+            $('#search-container').addClass('search-hide').removeClass('search-show');
+            document.cookie = "visible=false";
+        };
+    });    
 
 });
