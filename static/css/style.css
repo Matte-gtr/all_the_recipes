@@ -75,6 +75,7 @@
     padding-right: 50px;
     width: 95%;
     margin: 13px 0;
+    max-width: 978px;
 }
 
 .search-go {
@@ -92,6 +93,27 @@
     border-color: #9e9e9e;
 }
 
+.search-background {
+    background-image: url('/static/images/search-background.jpg');
+    background-attachment: scroll;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 40vh;
+    display: table;
+    padding: 0;
+}
+
+.search-wrapper {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+#search-field {
+    background-color: rgba(9,9,9,0.5);
+    padding: 16.5vh 5px;
+}
+
 /*-----------------media queries-----------------*/
 
 @media (min-width: 768px) {
@@ -105,6 +127,6 @@
 
 @media (min-width: 1200px) {
     #search {
-    width: 90%;
+    width: 80%;
     }
 }

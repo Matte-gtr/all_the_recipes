@@ -1,16 +1,25 @@
 {% extends 'base.html' %}
     {% block content %}
+
+    <!--search bar-->
         <div class="container-fluid search-hide" id="search-container">
             <div class="row">
-                <div class="col-12 center">
-                    <form action="{{ url_for('text_search') }}" method="POST" id="search-field">
-                        <input type="text" name="search" id="search" placeholder="search recipes" class="form-control"/>
-                        <button type="submit" class="btn btn-primary search-go"><i class="fas fa-search"></i></button>
-                    </form>
+                <div class="col-12 center search-background">
+                    <div class="search-wrapper">
+                        <form action="{{ url_for('text_search') }}" method="POST" id="search-field">
+                            <input type="text" name="search" id="search" placeholder="search recipes" class="form-control"/>
+                            <button type="submit" class="btn btn-primary search-go"><i class="fas fa-search"></i></button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
+
+        <!--header-->
+        <div class="container">
         <h3>{{ header }}</h3>
+
+        <!--recipes/results display-->
         {% if recipes|length > 0 %}
             {% for recipe in recipes %}
                 <h2>{{ recipe.recipe_name }}</h2>
@@ -21,4 +30,5 @@
         {% endif %}
         {{ pagination.info }}
         {{ pagination.links }}
+        </div>
     {% endblock %}
