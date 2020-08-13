@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
     {% block content %}
+    <div class="container">
         <div class="row">
             <img src="{{ recipe.image_url }}" onerror="this.src='/static/images/ATR-default.jpg'">
         </div>
@@ -10,4 +11,5 @@
             <a class="btn btn-primary" href="{{ url_for('edit_recipe', recipe_id=recipe._id) }}" role="button">Edit</a>
             <a class="btn btn-primary" href="#" role="button">Delete</a>
         {% endif %}
+    </div>
     {% endblock %}
