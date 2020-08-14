@@ -51,6 +51,15 @@
     color: #fb840a;
 }
 
+.white-text {
+    color: #fafafa;
+}
+
+.spacer {
+    height: 60px;
+    width: 100%;
+}
+
 /*-----------------nav bar & search bar-----------------*/
 
 #site-banner {

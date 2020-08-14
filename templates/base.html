@@ -14,7 +14,8 @@
 
 <body>
     <!-- navbar -->
-	<nav class="navbar navbar-expand-md navbar-light bg-light">
+    <div class="spacer"></div>
+	<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
 		<a class="navbar-brand" href="{{url_for('home_page')}}"><span class="site-logo">All the Recipes</span></a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -53,8 +54,8 @@
                         <a class="dropdown-item" href="{{ url_for('logout') }}">Log out</a>
                     </div>
             {% else %}
-			    <div class="btn btn-success mr-1"><a href="{{ url_for('user_login') }}" class="no-decoration">Login</a></div>
-                <div class="btn btn-success"><a href="{{ url_for('create_account') }}" class="no-decoration">Sign Up</a></div>
+			    <div class="btn btn-success mr-1"><a href="{{ url_for('user_login') }}" class="no-decoration white-text">Login</a></div>
+                <div class="btn btn-success"><a href="{{ url_for('create_account') }}" class="no-decoration white-text">Sign Up</a></div>
             {% endif %}
 				</li>
             </ul>
