@@ -1,6 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Rock+Salt&family=Source+Serif+Pro:ital@1&display=swap');
 
 /*-----------------general/re-usable styles-----------------*/
+
+body {
+    font-family: 'Source Serif Pro', sans-serif;
+}
 
 .center {
     text-align: center;
@@ -58,6 +62,15 @@
 .spacer {
     height: 60px;
     width: 100%;
+}
+
+.no-padding {
+    padding: 0;
+}
+
+.dark-theme {
+    background-color: #3a3a3a;
+    color: #fafafa;
 }
 
 /*-----------------nav bar & search bar-----------------*/
@@ -121,6 +134,15 @@
 #search-field {
     background-color: rgba(9,9,9,0.5);
     padding: 16.5vh 5px;
+}
+
+/*-----------------home page / recipe display-----------------*/
+
+.header {
+    text-align: center;
+    padding: 17px;
+    font-family: 'Dancing Script';
+    font-size: 30px;
 }
 
 /*-----------------media queries-----------------*/

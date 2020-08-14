@@ -16,19 +16,27 @@
     </div>
 
     <!--header-->
-    <div class="container">
-    <h3>{{ header }}</h3>
+    <div class="container-fluid dark-theme">
+        <div class="row">
+            <div class="col-12 no-padding">
+                {% if request.endpoint == 'home_page' %}
+                    <h2 class="header">{{ header }}</h2>
+                {% else %}
+                    <h3 class="search-title">{{ header }}</h3>
+                {% endif %}
+            </div>
+        </div>
 
     <!--recipes/results display-->
-    {% if recipes|length > 0 %}
-        {% for recipe in recipes %}
-            <h2>{{ recipe.recipe_name }}</h2>
-            <a href="{{ url_for('view_recipe', recipe_id=recipe._id) }}"><button type="button" class="btn btn-primary btn-sm">View</button></a>
-        {% endfor %}
-    {% else %}
-        <h2>{{ error_message }}</h2>
-    {% endif %}
-    {{ pagination.info }}
-    {{ pagination.links }}
+        {% if recipes|length > 0 %}
+            {% for recipe in recipes %}
+                <h2>{{ recipe.recipe_name }}</h2>
+                <a href="{{ url_for('view_recipe', recipe_id=recipe._id) }}"><button type="button" class="btn btn-primary btn-sm">View</button></a>
+            {% endfor %}
+        {% else %}
+            <h2>{{ error_message }}</h2>
+        {% endif %}
+        {{ pagination.info }}
+        {{ pagination.links }}
     </div>
     {% endblock %}
