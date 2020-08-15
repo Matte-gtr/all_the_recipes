@@ -125,7 +125,7 @@ def login():
     if existing_user:
         if check_password_hash(existing_user["password"],
                                request.form.get("password")):
-            session['username'] = existing_user['user_name'].lower()
+            session['username'] = existing_user['user_name']
             return redirect(url_for('home_page'))
         else:
             flash('Incorrect password')
@@ -195,18 +195,18 @@ def recipes_by_category(category):
                            {category.capitalize()}", pagination=pagination)
 
 
-@app.route('/recipes/search/<owner>')
+@app.route('/recipes/search/user/<owner>')
 def user_recipes(owner):
     """ displays a list of all the recipes created by the current user """
     page, per_page, offset, search = pagination_vars()
-    recipes = mongo.db.recipes.find({'owner': session['username'].lower(
-        )}).sort(
+    username = session['username'].lower()
+    recipes = mongo.db.recipes.find({'owner': username}).sort(
         'updated_on', pymongo.ASCENDING).limit(per_page).skip(offset)
     pagination = Pagination(page=page, total=recipes.count(), search=search,
                             record_name='recipes', offset=offset)
     return render_template('home_page.html', recipes=list(recipes),
-                           header="All " + owner + " Recipes",
-                           error_message=f"{owner}\
+                           header=f"All {owner.capitalize()} Recipes",
+                           error_message=f"{owner.capitalize()}\
                             currently has no recipes",
                            pagination=pagination)
 
