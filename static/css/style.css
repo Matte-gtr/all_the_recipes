@@ -60,7 +60,7 @@ body {
 }
 
 .spacer {
-    height: 60px;
+    height: 62px;
     width: 100%;
 }
 
@@ -104,7 +104,7 @@ body {
     margin-left: -50px;
     width: 50px;
     border-radius: 12%;
-    margin-bottom: 5px;
+    margin-bottom: 2px;
 }
 
 .user-expand-button {
@@ -133,7 +133,7 @@ body {
 
 #search-field {
     background-color: rgba(9,9,9,0.5);
-    padding: 16.5vh 5px;
+    padding: 16.6vh 5px;
 }
 
 /*-----------------home page / recipe display-----------------*/
@@ -142,7 +142,15 @@ body {
     text-align: center;
     padding: 17px;
     font-family: 'Dancing Script';
-    font-size: 30px;
+    font-size: 37px;
+    margin: 0;
+}
+
+.nine-width-hr {
+    color: #fafafa;
+    background-color: #fafafa;
+    margin: 0 auto 10px auto;
+    width: 75%;
 }
 
 /*-----------------media queries-----------------*/

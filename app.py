@@ -125,7 +125,7 @@ def login():
     if existing_user:
         if check_password_hash(existing_user["password"],
                                request.form.get("password")):
-            session['username'] = existing_user['user_name']
+            session['username'] = existing_user['user_name'].lower()
             return redirect(url_for('home_page'))
         else:
             flash('Incorrect password')
@@ -134,7 +134,8 @@ def login():
         flash('The username you entered does not exist')
         return redirect(url_for('user_login'))
     return render_template('home_page.html', user=mongo.db.users.find_one(
-                            {'user_name': request.form.get('username')}))
+                            {'user_name': request.form.get('username').lower(
+                                )}))
 
 
 @app.route('/user/logout')
@@ -174,7 +175,7 @@ def insert_recipe():
         'image_url': request.form.get("image_url"),
         'created_on': current_time,
         'updated_on': current_time,
-        'owner': session['username']
+        'owner': session['username'].lower()
     })
     return redirect(url_for('home_page'))
 
@@ -196,16 +197,16 @@ def recipes_by_category(category):
 
 @app.route('/recipes/search/<owner>')
 def user_recipes(owner):
-    """ displays a list of all the recipes created by the current user,
-    using the session['username'] variable """
+    """ displays a list of all the recipes created by the current user """
     page, per_page, offset, search = pagination_vars()
-    recipes = mongo.db.recipes.find({'owner': session['username']}).sort(
+    recipes = mongo.db.recipes.find({'owner': session['username'].lower(
+        )}).sort(
         'updated_on', pymongo.ASCENDING).limit(per_page).skip(offset)
     pagination = Pagination(page=page, total=recipes.count(), search=search,
                             record_name='recipes', offset=offset)
     return render_template('home_page.html', recipes=list(recipes),
-                           header="All " + owner.capitalize() + " Recipes",
-                           error_message=f"{owner.capitalize()}\
+                           header="All " + owner + " Recipes",
+                           error_message=f"{owner}\
                             currently has no recipes",
                            pagination=pagination)
 
