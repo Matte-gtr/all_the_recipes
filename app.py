@@ -36,7 +36,7 @@ def home_page():
     """ displays the home page as well as a list of available recipes"""
     page, per_page, offset, search = pagination_vars()
     recipes = mongo.db.recipes.find().sort(
-        'updated_on', pymongo.DESCENDING).limit(per_page).skip(offset)
+        'updated_on', pymongo.ASCENDING).limit(per_page).skip(offset)
     pagination = Pagination(page=page, total=recipes.count(), search=search,
                             record_name='recipes', offset=offset)
     return render_template('home_page.html',

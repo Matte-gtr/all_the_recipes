@@ -23,21 +23,45 @@
                     <h2 class="header">{{ header }}</h2>
                     <hr class="nine-width-hr">
                 {% else %}
-                    <h3 class="search-title">{{ header }}</h3>
+                    <div class="container">
+                        <h3 class="search-header">{{ header }}</h3>
+                            {{ pagination.info }}
+                            {{ pagination.links }}
+                        <hr class="nine-width-hr">
+                    </div>
                 {% endif %}
             </div>
         </div>
 
-    <!--recipes/results display-->
+        <!--recipes/results display-->
         {% if recipes|length > 0 %}
-            {% for recipe in recipes %}
-                <h2>{{ recipe.recipe_name }}</h2>
-                <a href="{{ url_for('view_recipe', recipe_id=recipe._id) }}"><button type="button" class="btn btn-primary btn-sm">View</button></a>
-            {% endfor %}
+        <div class="container no-padding">
+            <div class="row d-flex">
+                {% for recipe in recipes %}
+                <div class="col-12 col-lg-6 col-xl-4 no-padding d-flex justify-content-center">
+                    <div class="recipe-card">
+                        <div class="image-container">
+                            <img class="card-image" src="{{ recipe.image_url }}" onerror="this.src='/static/images/ATR-default.jpg'">
+                        </div>
+                        <h2>{{ recipe.recipe_name }}</h2>
+                        <a href="{{ url_for('view_recipe', recipe_id=recipe._id) }}"><button type="button" class="btn btn-primary btn-sm">View</button></a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
         {% else %}
-            <h2>{{ error_message }}</h2>
+        <div class="container">
+            <div class="row">
+                <h2>{{ error_message }}</h2>
+            </div>
+        </div>
         {% endif %}
-        {{ pagination.info }}
-        {{ pagination.links }}
+        <div class="container">
+            <div class="row">
+                {{ pagination.info }}
+                {{ pagination.links }}
+            </div>
+        </div>
     </div>
     {% endblock %}
