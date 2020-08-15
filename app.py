@@ -6,7 +6,7 @@ from flask import Flask, render_template, url_for, session, redirect,\
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_paginate import Pagination, get_page_parameter
+from flask_paginate import Pagination
 
 
 app = Flask(__name__)
@@ -19,26 +19,22 @@ app.secret_key = os.environ.get('SECRET_KEY')
 mongo = PyMongo(app)
 
 
-def pagination_vars():
-    page = request.args.get(get_page_parameter(), type=int, default=1)
-    per_page = 10
-    offset = (page - 1) * per_page
-    search = False
-    q = request.args.get('q')
-    if q:
-        search = True
-    return page, per_page, offset, search
-
-
 @app.route("/")
 @app.route("/get_recipes")
 def home_page():
     """ displays the home page as well as a list of available recipes"""
-    page, per_page, offset, search = pagination_vars()
+    page = int(request.args.get('page', 1))
+    per_page = 12
+    offset = (page - 1) * per_page
     recipes = mongo.db.recipes.find().sort(
         'updated_on', pymongo.ASCENDING).limit(per_page).skip(offset)
-    pagination = Pagination(page=page, total=recipes.count(), search=search,
-                            record_name='recipes', offset=offset)
+    search = False
+    q = request.args.get('q')
+    if q:
+        search = True
+    pagination = Pagination(page=page, per_page=per_page, offset=offset,
+                            total=recipes.count(), css_framework='bootstrap4',
+                            search=search, record_name='recipes')
     return render_template('home_page.html',
                            recipes=list(recipes),
                            header="Check out our latest recipes",
@@ -52,8 +48,8 @@ def about():
 
 @app.route("/recipes/search", methods=["GET", "POST"])
 def text_search():
-    page = request.args.get(get_page_parameter(), type=int, default=1)
-    per_page = 10
+    page = int(request.args.get('page', 1))
+    per_page = 12
     offset = (page - 1) * per_page
     searchit = False
     q = request.args.get('q')
@@ -62,8 +58,9 @@ def text_search():
     search = request.form.get('search')
     recipes = mongo.db.recipes.find({'$text': {'$search': search}}).limit(
         per_page).skip(offset)
-    pagination = Pagination(page=page, total=recipes.count(), search=searchit,
-                            record_name='recipes', offset=offset)
+    pagination = Pagination(page=page, per_page=per_page, offset=offset,
+                            total=recipes.count(), css_framework='bootstrap4',
+                            search=searchit, record_name='recipes')
     print(pagination)
     return render_template('home_page.html', recipes=list(recipes),
                            error_message=f'No recipes match the \
@@ -184,11 +181,18 @@ def insert_recipe():
 def recipes_by_category(category):
     """ searches for all recipes with a chosen category from a drop down list,
     then displays those recipes on the home page """
-    page, per_page, offset, search = pagination_vars()
+    page = int(request.args.get('page', 1))
+    per_page = 12
+    offset = (page - 1) * per_page
+    search = False
+    q = request.args.get('q')
+    if q:
+        search = True
     recipes = mongo.db.recipes.find({'category': category}).sort(
         'updated_on', pymongo.ASCENDING).limit(per_page).skip(offset)
-    pagination = Pagination(page=page, total=recipes.count(), search=search,
-                            record_name='recipes', offset=offset)
+    pagination = Pagination(page=page, per_page=per_page, offset=offset,
+                            total=recipes.count(), css_framework='bootstrap4',
+                            search=search, record_name='recipes')
     return render_template('home_page.html', recipes=list(recipes),
                            header="All " + category.capitalize() + " Recipes",
                            error_message=f"No results for \
@@ -198,12 +202,19 @@ def recipes_by_category(category):
 @app.route('/recipes/search/user/<owner>')
 def user_recipes(owner):
     """ displays a list of all the recipes created by the current user """
-    page, per_page, offset, search = pagination_vars()
+    page = int(request.args.get('page', 1))
+    per_page = 12
+    offset = (page - 1) * per_page
+    search = False
+    q = request.args.get('q')
+    if q:
+        search = True
     username = session['username'].lower()
     recipes = mongo.db.recipes.find({'owner': username}).sort(
         'updated_on', pymongo.ASCENDING).limit(per_page).skip(offset)
-    pagination = Pagination(page=page, total=recipes.count(), search=search,
-                            record_name='recipes', offset=offset)
+    pagination = Pagination(page=page, per_page=per_page, offset=offset,
+                            total=recipes.count(), css_framework='bootstrap4',
+                            search=search, record_name='recipes')
     return render_template('home_page.html', recipes=list(recipes),
                            header=f"All {owner.capitalize()} Recipes",
                            error_message=f"{owner.capitalize()}\
