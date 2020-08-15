@@ -27,7 +27,7 @@ def home_page():
     per_page = 12
     offset = (page - 1) * per_page
     recipes = mongo.db.recipes.find().sort(
-        'updated_on', pymongo.ASCENDING).limit(per_page).skip(offset)
+        'updated_on', pymongo.DESCENDING).limit(per_page).skip(offset)
     search = False
     q = request.args.get('q')
     if q:

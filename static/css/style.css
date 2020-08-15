@@ -75,7 +75,7 @@ body {
 
 .pagination-page-info {
     padding: .6em;
-    padding-left: 0;
+    padding-left: 17px;
     width: 40em;
     margin: .5em;
     margin-left: 0;
@@ -93,6 +93,10 @@ body {
 .page-link {
     color: #000000;
     font-weight: 700;
+}
+
+.pagination {
+    padding-left: 17px;
 }
 
 /*-----------------nav bar & search bar-----------------*/
@@ -177,8 +181,15 @@ body {
 .nine-width-hr {
     color: #fafafa;
     background-color: #fafafa;
-    margin: 0 auto 35px auto;
+    margin: 0 auto 20px auto;
     width: 75%;
+}
+
+.nine-width-hr-left {
+    color: #fafafa;
+    background-color: #fafafa;
+    width: 75%;
+    margin-left: 15px;
 }
 
 .recipe-card {

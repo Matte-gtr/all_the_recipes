@@ -25,9 +25,9 @@
                 {% else %}
                     <div class="container">
                         <h3 class="search-header">{{ header }}</h3>
+                        <hr class="nine-width-hr-left">
                             {{ pagination.info }}
                             {{ pagination.links }}
-                        <hr class="nine-width-hr">
                     </div>
                 {% endif %}
             </div>
@@ -57,12 +57,18 @@
             </div>
         </div>
         {% endif %}
-        <div class="container">
-            <div class="row">
-                {{ pagination.info }}
+        <div class="row">
+            <div class="col-12 no-padding">
+                <div class="container">
+                    {{ pagination.info }}
+                </div>
             </div>
-            <div class="row">
-                {{ pagination.links }}
+        </div>
+        <div class="row">
+            <div class="col-12 no-padding">
+                <div class="container">
+                    {{ pagination.links }}
+                </div>
             </div>
         </div>
     </div>
