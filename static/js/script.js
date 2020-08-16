@@ -1,11 +1,8 @@
 $(document).ready(function(){
 
-    let newIngredientField = '<div><input name="ingredients" type="text" class="" /><button type="button" class="btn btn-outline-primary btn-sm remove-ingredient">-</button></div>';
-    let newMethodField = '<div><input name="method" type="text" class="" /><button type="button" class="btn btn-outline-primary btn-sm remove-method">-</button></div>';
-    let newToolField = '<div><input name="tools" type="text" class="" /><button type="button" class="btn btn-outline-primary btn-sm remove-tool">-</button></div>';
-
     $('.add-ingredient').click(function(){
-            $('#ingredient-wrapper').append(newIngredientField);
+        let newIngredientField = '<div><input name="ingredients" type="text" class="form-control short-field" /><button type="button" class="btn btn-outline-primary btn-sm remove-ingredient remove-button">-</button></div>';
+        $('#ingredient-wrapper').append(newIngredientField);
     });
 
     $('#ingredient-wrapper').on('click', '.remove-ingredient', function(){
@@ -13,7 +10,8 @@ $(document).ready(function(){
     });
 
     $('.add-method').click(function(){
-            $('#method-wrapper').append(newMethodField);
+        let newMethodField = '<div><input name="method" type="text" class="form-control short-field" /><button type="button" class="btn btn-outline-primary btn-sm remove-method remove-button">-</button></div>';
+        $('#method-wrapper').append(newMethodField);
     });
 
     $('#method-wrapper').on('click', '.remove-method', function(){
@@ -21,21 +19,12 @@ $(document).ready(function(){
     });
 
     $('.add-tool').click(function(){
-            $('#tools-wrapper').append(newToolField);
+        let newToolField = '<div><input name="tools" type="text" class="form-control short-field" /><button type="button" class="btn btn-outline-primary btn-sm remove-tool remove-button">-</button></div>';
+        $('#tools-wrapper').append(newToolField);
     });
 
     $('#tools-wrapper').on('click', '.remove-tool', function(){
         $(this).parent('div').remove();
-    });
-
-    $('#search-button').click(function() {
-        if ($('#search-container').hasClass('search-hide')) {
-            $('#search-container').removeClass('search-hide').addClass('search-show');
-            document.cookie = "visible=true";
-        } else {
-            $('#search-container').addClass('search-hide').removeClass('search-show');
-            document.cookie = "visible=false";
-        };
-    });    
+    });  
 
 });

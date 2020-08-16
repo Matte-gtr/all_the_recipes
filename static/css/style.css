@@ -213,6 +213,10 @@ body {
     box-shadow: inset 0 0 25px #28a745;
 }
 
+.card-hover:hover .card-heading {
+    text-decoration: underline;
+}
+
 .image-container {
     width: 100%;
     height: 275px;
@@ -257,6 +261,48 @@ body {
     bottom: 16px;
 }
 
+/*-----------------create/edit recipe-----------------*/
+
+.recipe-form {
+    width: 100%;
+    max-width: 800px;;
+    margin: 0 auto;
+    background-color: rgba(0,0,0,0.6);
+    padding: 10px;
+}
+
+.form-container {
+    padding: 10px;
+}
+
+.short-field {
+    display: inline-block;
+    width: 70%;
+}
+
+.add-button {
+    width: 120px;
+    margin-bottom: 4px;
+    margin-left: 17px;
+}
+
+.remove-button {
+    height: 39px;
+    margin-bottom: 3px;
+    width: 30px;
+    margin-left: 4px;
+    background-color: #007bff;
+    color: #fafafa;
+}
+
+.bg-create-recipe {
+    background: url('/static/images/background-form.png');
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    height: 100%;
+    background-size: cover;
+}
+
 /*-----------------media queries-----------------*/
 
 @media (min-width: 768px) {
@@ -265,6 +311,13 @@ body {
     }
     .green-hover {
     padding: 0 5px;
+    }
+}
+
+@media (min-width: 819px) {
+    .recipe-form {
+        margin: 17px auto;
+        border-radius: 10px;
     }
 }
 

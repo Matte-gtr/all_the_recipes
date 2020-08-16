@@ -65,7 +65,7 @@ def text_search():
     return render_template('home_page.html', recipes=list(recipes),
                            error_message=f'No recipes match the \
                                search "{search}"', pagination=pagination,
-                           header=f"Recipes containing {search}")
+                           header=f'Recipes containing "{search}"')
 
 
 @app.context_processor
@@ -148,7 +148,8 @@ def create_recipe():
     """ opens the create recipe page with all the
     input fields to create a new recipe """
     return render_template('create_recipe.html',
-                           cats=mongo.db.categories.find())
+                           cats=mongo.db.categories.find(),
+                           header="Create a Recipe")
 
 
 @app.route("/recipes/create_recipe/post", methods=['POST'])
@@ -158,7 +159,7 @@ def insert_recipe():
     (along with the time/date the recipe was created and last edited),
     then redirects the user back to the home page """
     recipes = mongo.db.recipes
-    current_time = datetime.datetime.now().strftime('%X %x')
+    current_time = datetime.datetime.now().strftime('%x %X')
     recipes.insert_one({
         'category': request.form.get('category'),
         'recipe_name': request.form.get('recipe_name'),
@@ -248,7 +249,7 @@ def update_recipe(recipe_id):
     """ updates a recipe using recipe_id based on the information input into the
     edit_recipe page. The owner and created on fields are not updated and the
     updated_on field is automatically updated """
-    current_time = datetime.datetime.now().strftime('%X %x')
+    current_time = datetime.datetime.now().strftime('%x %X')
     mongo.db.recipes.update({'_id': ObjectId(recipe_id)},
                             {'$set': {
                                 'category': request.form.get('category'),
