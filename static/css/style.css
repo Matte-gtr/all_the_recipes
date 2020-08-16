@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Rock+Salt&family=Source+Serif+Pro:ital@1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Rock+Salt&family=Source+Serif+Pro:ital@1&family=Alata&display=swap');
 
 /*-----------------general/re-usable styles-----------------*/
 
@@ -76,7 +76,7 @@ body {
 .pagination-page-info {
     padding: .6em;
     padding-left: 17px;
-    width: 40em;
+    width: 100%;
     margin: .5em;
     margin-left: 0;
     font-size: 14px;
@@ -193,18 +193,29 @@ body {
 }
 
 .recipe-card {
-    max-width: 400px;
+    max-width: 380px;
+    min-width: 300px;
     background-color: #fafafa;
+    transition: background-color 0.5s ease-in-out;
     overflow: hidden;
     padding: 5px;
-    height: 500px;
+    height: 455px;
     margin: 10px;
     color: #000000;
 }
 
+.card-hover {
+    transition: box-shadow 0.5s ease-in-out;
+}
+
+.card-hover:hover {
+    text-decoration: none;
+    box-shadow: inset 0 0 25px #28a745;
+}
+
 .image-container {
     width: 100%;
-    height: 347px;
+    height: 275px;
     overflow: hidden;
     border-radius: 10px;
 }
@@ -214,7 +225,37 @@ body {
     height: 100%;
 }
 
+.card-type {
+    margin: 8px;
+    margin-bottom: 4px;
+    color: #fb840a;
+    font-weight: 600;
+    font-family: Atlanta, sans-serif;
+}
 
+.heading-container {
+    height: 56px;
+    overflow: hidden;
+}
+
+.card-heading {
+    margin-left: 8px;
+    margin-right: 8px;
+    font-size: 1.5rem;
+}
+
+.card-info {
+    margin-left: 8px;
+}
+
+.card-info i {
+    color: #f37b00;
+}
+
+.info-wrap {
+    position: absolute;
+    bottom: 16px;
+}
 
 /*-----------------media queries-----------------*/
 

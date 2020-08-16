@@ -2,74 +2,84 @@
     {% block content %}
 
     <!--search bar-->
-    <div class="container-fluid search-hide" id="search-container">
-        <div class="row">
-            <div class="col-12 center search-background">
-                <div class="search-wrapper">
-                    <form action="{{ url_for('text_search') }}" method="POST" id="search-field">
-                        <input type="text" name="search" id="search" placeholder="search recipes" class="form-control"/>
-                        <button type="submit" class="btn btn-primary search-go"><i class="fas fa-search"></i></button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!--header-->
-    <div class="container-fluid dark-theme">
-        <div class="row">
-            <div class="col-12 no-padding">
-                {% if request.endpoint == 'home_page' %}
-                    <h2 class="header">{{ header }}</h2>
-                    <hr class="nine-width-hr">
-                {% else %}
-                    <div class="container">
-                        <h3 class="search-header">{{ header }}</h3>
-                        <hr class="nine-width-hr-left">
-                            {{ pagination.info }}
-                            {{ pagination.links }}
-                    </div>
-                {% endif %}
-            </div>
-        </div>
-
-        <!--recipes/results display-->
-        {% if recipes|length > 0 %}
-        <div class="container no-padding">
-            <div class="row d-flex">
-                {% for recipe in recipes %}
-                <div class="col-12 col-lg-6 col-xl-4 no-padding d-flex justify-content-center">
-                    <div class="recipe-card">
-                        <div class="image-container">
-                            <img class="card-image" src="{{ recipe.image_url }}" onerror="this.src='/static/images/ATR-default.jpg'">
-                        </div>
-                        <h2>{{ recipe.recipe_name }}</h2>
-                        <a href="{{ url_for('view_recipe', recipe_id=recipe._id) }}"><button type="button" class="btn btn-primary btn-sm">View</button></a>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
-        {% else %}
-        <div class="container">
+    <div class="main"></div>
+        <div class="container-fluid search-hide" id="search-container">
             <div class="row">
-                <h2>{{ error_message }}</h2>
-            </div>
-        </div>
-        {% endif %}
-        <div class="row">
-            <div class="col-12 no-padding">
-                <div class="container">
-                    {{ pagination.info }}
+                <div class="col-12 center search-background">
+                    <div class="search-wrapper">
+                        <form action="{{ url_for('text_search') }}" method="POST" id="search-field">
+                            <input type="text" name="search" id="search" placeholder="search recipes" class="form-control"/>
+                            <button type="submit" class="btn btn-primary search-go"><i class="fas fa-search"></i></button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-12 no-padding">
-                <div class="container">
-                    {{ pagination.links }}
+
+        <!--header-->
+        <section class="container-fluid dark-theme">
+            <div class="row">
+                <div class="col-12 no-padding">
+                    {% if request.endpoint == 'home_page' %}
+                        <h2 class="header">{{ header }}</h2>
+                        <hr class="nine-width-hr">
+                    {% else %}
+                        <div class="container">
+                            <h3 class="search-header">{{ header }}</h3>
+                            <hr class="nine-width-hr-left">
+                                {{ pagination.info }}
+                                {{ pagination.links }}
+                        </div>
+                    {% endif %}
                 </div>
             </div>
-        </div>
-    </div>
+
+            <!--recipes/results display-->
+            {% if recipes|length > 0 %}
+            <div class="container no-padding">
+                <div class="row d-flex">
+                    {% for recipe in recipes %}
+                    <div class="col-12 col-lg-6 col-xl-4 no-padding d-flex justify-content-center">
+                        <a href="{{ url_for('view_recipe', recipe_id=recipe._id) }}" class="card-hover">
+                            <article class="recipe-card">
+                                <div class="image-container">
+                                    <img class="card-image" src="{{ recipe.image_url }}" onerror="this.src='/static/images/ATR-default.jpg'">
+                                </div>
+                                <div class="card-type">RECIPE</div>
+                                <div class="heading-container">
+                                    <h2 class="card-heading">{{ recipe.recipe_name.capitalize() }}</h2>
+                                </div>
+                                <div class="info-wrap">
+                                    <div class="card-info"><i class="fas fa-user"></i><span> Serves: {{ recipe.servings }}</span></div>
+                                    <div class="card-info"><i class="far fa-clock"></i><span> Prep: {{ recipe.preparation_time }} minutes</span></div>
+                                    <div class="card-info"><i class="far fa-clock"></i><span> Cook time: {{ recipe.cook_time }} minutes</span></div>
+                                </div>
+                            </article>
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% else %}
+            <div class="container">
+                <div class="row">
+                    <h2>{{ error_message }}</h2>
+                </div>
+            </div>
+            {% endif %}
+            <div class="row">
+                <div class="col-12 no-padding">
+                    <div class="container">
+                        {{ pagination.info }}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 no-padding">
+                    <div class="container">
+                        {{ pagination.links }}
+                    </div>
+                </div>
+            </div>
+        </section>
     {% endblock %}

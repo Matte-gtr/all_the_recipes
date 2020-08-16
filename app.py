@@ -189,7 +189,7 @@ def recipes_by_category(category):
     if q:
         search = True
     recipes = mongo.db.recipes.find({'category': category}).sort(
-        'updated_on', pymongo.ASCENDING).limit(per_page).skip(offset)
+        'updated_on', pymongo.DESCENDING).limit(per_page).skip(offset)
     pagination = Pagination(page=page, per_page=per_page, offset=offset,
                             total=recipes.count(), css_framework='bootstrap4',
                             search=search, record_name='recipes')
@@ -211,7 +211,7 @@ def user_recipes(owner):
         search = True
     username = session['username'].lower()
     recipes = mongo.db.recipes.find({'owner': username}).sort(
-        'updated_on', pymongo.ASCENDING).limit(per_page).skip(offset)
+        'updated_on', pymongo.DESCENDING).limit(per_page).skip(offset)
     pagination = Pagination(page=page, per_page=per_page, offset=offset,
                             total=recipes.count(), css_framework='bootstrap4',
                             search=search, record_name='recipes')
