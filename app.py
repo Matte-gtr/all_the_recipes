@@ -242,7 +242,8 @@ def edit_recipe(recipe_id):
     return render_template('edit_recipe.html',
                            recipe=mongo.db.recipes.find_one({
                             '_id': ObjectId(recipe_id)}),
-                           cats=mongo.db.categories.find())
+                           cats=mongo.db.categories.find(),
+                           header="Edit Recipe")
 
 
 @app.route('/recipes/update_recipe/<recipe_id>', methods=["POST"])

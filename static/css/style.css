@@ -335,7 +335,7 @@ body {
 }
 
 @media (min-width: 819px) {
-    .recipe-form {
+    .atr-form {
         margin: 17px auto;
         border-radius: 10px;
     }

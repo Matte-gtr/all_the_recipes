@@ -1,97 +1,94 @@
 {% extends 'base.html' %} {% block content %}
-<div class="container">
+<div class="container-fluid dark-theme">
+<!--Header-->
     <div class="row">
-        <form action="{{ url_for('update_recipe', recipe_id=recipe._id) }}" method="POST">
-            <div class="row">
-                <div class="col-12">
-                    <label for="category">Choose Category: </label>
-                    <select id="category" name="category" class="">
-                        <option value="" disabled selected>Choose Category</option>
-                        {% for cat in cats %}
-                            {% if cat.category_name == recipe.category %}
-                                <option value="{{ cat.category_name }}" selected>{{ cat.category_name.capitalize() }}</option>
-                            {% else %}
-                                <option value="{{ cat.category_name }}">{{ cat.category_name.capitalize() }}</option>
-                            {% endif %}
-                        {% endfor %}
-                    </select>
-                </div>
+        <div class="col-12 no-padding">
+            <h2 class="header">{{ header }}</h2>
+            <hr class="nine-width-hr">
+        </div>
+    </div>
+    <!--Form-->
+    <div class="row bg-create-recipe">
+        <form action="{{ url_for('update_recipe', recipe_id=recipe._id) }}" method="POST" class="atr-form">
+            <div class="form-group">
+                <label for="category">Choose Category: </label>
+                <select id="category" name="category" class="form-control">
+                    <option value="" disabled selected>Choose Category</option>
+                    {% for cat in cats %}
+                        {% if cat.category_name == recipe.category %}
+                            <option value="{{ cat.category_name }}" selected>{{ cat.category_name.capitalize() }}</option>
+                        {% else %}
+                            <option value="{{ cat.category_name }}">{{ cat.category_name.capitalize() }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
             </div>
-            <div class="row">
-                <div class="col-12">
-                    <label for="recipe_name">Recipe Name: </label>
-                    <input id="recipe_name" name="recipe_name" type="text" class="" value="{{ recipe.recipe_name }}" required />
-                </div>
+            <div class="form-group">
+                <label for="recipe_name">Recipe Name: </label>
+                <input id="recipe_name" name="recipe_name" type="text" class="form-control" value="{{ recipe.recipe_name }}" required />
             </div>
-            <div class="row">
-                <div class="col-12">
-                    <label for="description">Description: </label>
-                    <textarea name="description" id="description">{{ recipe.description }}</textarea>
-                </div>
+            <div class="form-group">
+                <label for="description">Description: </label>
+                <textarea name="description" id="description" class="form-control">{{ recipe.description }}</textarea>
             </div>
-            <div class="row">
-                <div class="col-12" id="ingredient-wrapper">
-                    <label>Ingredients: </label> <button type="button" class="btn btn-primary btn-sm add-ingredient">Add ingredient</button>
+            <div class="form-group">
+                <div id="ingredient-wrapper">
+                    <label>Ingredients: </label>
+                    <button type="button" class="btn btn-primary btn-sm add-ingredient add-button">Add ingredient</button>
                     {% for ingredient in recipe.ingredients %}
                         {% if not ingredient == "" %}
                         <div>
-                            <input name="ingredients" type="text" class="" value="{{ ingredient }}" />
-                            <button type="button" class="btn btn-outline-primary btn-sm remove-ingredient">-</button>
+                            <input name="ingredients" type="text" class="form-control short-field" value="{{ ingredient }}" />
+                            <button type="button" class="btn btn-outline-primary btn-sm remove-ingredient remove-button ml-0">-</button>
                         </div>
                         {% endif %}
                     {% endfor %}
                 </div>
             </div>
-            <div class="row">
-                <div class="col-12" id="method-wrapper">
-                    <label>Method: </label> <button type="button" class="btn btn-primary btn-sm add-method">Add Method Step</button>
+            <div class="form-group">
+                <div id="method-wrapper">
+                    <label>Method: </label>
+                    <button type="button" class="btn btn-primary btn-sm add-method add-button">Add Method Step</button>
                     {% for step in recipe.method %}
                     <div>
-                        <input name="method" type="text" class="" value="{{ step }}"/>
-                        <button type="button" class="btn btn-outline-primary btn-sm remove-method">-</button>
+                        <input name="method" type="text" class="form-control short-field" value="{{ step }}"/>
+                        <button type="button" class="btn btn-outline-primary btn-sm remove-method remove-button ml-0">-</button>
                     </div>
                     {% endfor %}
                 </div>
             </div>
-            <div class="row">
-                <div class="col-12" id="tools-wrapper">
-                    <label>Required Tools: </label> <button type="button" class="btn btn-primary btn-sm add-tool">Add Tool</button>
+            <div class="form-group">
+                <div id="tools-wrapper">
+                    <label>Required Tools: </label>
+                    <button type="button" class="btn btn-primary btn-sm add-tool add-button">Add Tool</button>
                     {% for tool in recipe.required_tools %}
                     <div>
-                        <input name="tools" type="text" class="" value="{{ tool }}"/>
-                        <button type="button" class="btn btn-outline-primary btn-sm remove-tool">-</button>
+                        <input name="tools" type="text" class="form-control short-field" value="{{ tool }}"/>
+                        <button type="button" class="btn btn-outline-primary btn-sm remove-tool remove-button ml-0">-</button>
                     </div>
                     {% endfor %}
                 </div>
             </div>
-            <div class="row">
-                <div class="col-12">
-                    <label for="servings">Servings: </label>
-                    <input id="servings" name="servings" type="number" class="" value="{{ recipe.servings }}"/>
-                </div>
+            <div class="form-group">
+                <label for="servings">Servings: </label>
+                <input id="servings" name="servings" type="number" class="form-control short-field" value="{{ recipe.servings }}"/>
             </div>
-            <div class="row">
-                <div class="col-12">
-                    <label for="preparation_time">Prep Time: </label>
-                    <input id="preparation_time" name="preparation_time" type="number" class="" value="{{ recipe.preparation_time }}" />
-                    <span>minutes</span>
-                </div>
+            <div class="form-group">
+                <label for="preparation_time">Prep Time: </label>
+                <input id="preparation_time" name="preparation_time" type="number" class="form-control short-field" value="{{ recipe.preparation_time }}" />
+                <span>minutes</span>
             </div>
-            <div class="row">
-                <div class="col-12">
-                    <label for="cook_time">Cook Time: </label>
-                    <input id="cook_time" name="cook_time" type="number" class="" step="5" value="{{ recipe.cook_time }}"/>
-                    <span>minutes</span>
-                </div>
+            <div class="form-group">
+                <label for="cook_time">Cook Time: </label>
+                <input id="cook_time" name="cook_time" type="number" class="form-control short-field" step="5" value="{{ recipe.cook_time }}"/>
+                <span>minutes</span>
             </div>
-            <div class="row">
-                <div class="col-12">
-                    <label for="image_url">Image URL: </label>
-                    <input id="image_url" name="image_url" type="text" class="" step="5" value="{{ recipe.image_url }}"/>
-                </div>
+            <div class="form-group">
+                <label for="image_url">Image URL: </label>
+                <input id="image_url" name="image_url" type="text" class="form-control" step="5" value="{{ recipe.image_url }}"/>
             </div>
-            <div class="row">
-                <button type="submit">Update recipe</button>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary ml-3">Update recipe</button>
             </div>
         </form>
     </div>
