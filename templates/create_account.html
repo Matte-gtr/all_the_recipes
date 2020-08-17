@@ -1,45 +1,45 @@
 {% extends 'base.html' %}
     {% block content %}
-    <div class="container">
+    <div class="container-fluid dark-theme">
+        <!--Header-->
         <div class="row">
-	        <form action="{{ url_for('insert_account') }}" method="POST">
-		        <div class="row">
-			        <div class="col-12">
-                        <label for="username">Username: </label>
-				        <input id="username" name="username" type="text" class="" placeholder="DaveSmith123" pattern="^[a-zA-Z0-9]{5, 15}$" required/>
-                    </div>
+            <div class="col-12 no-padding">
+                <h2 class="header">{{ header }}</h2>
+                <hr class="nine-width-hr">
+            </div>
+        </div>
+        <!--Create account form-->
+        <div class="full-screen">
+	        <form action="{{ url_for('insert_account') }}" method="POST" class="atr-form no-bg w100-md-70">
+		        <div class="form-group">
+                    <label for="username">Username: </label>
+                    <input id="username" name="username" type="text" class="form-control" placeholder="DaveSmith123" pattern="^[a-zA-Z0-9]{5, 15}$" required/>
 			    </div>
-                <div class="row">
-			        <div class="col-12">
-                        <label for="email">Email: </label>
-				        <input id="email" name="email" type="email" class="" placeholder="dave123@outlook.com" required/>
-                    </div>
+                <div class="form-group">
+                    <label for="email">Email: </label>
+                    <input id="email" name="email" type="email" class="form-control" placeholder="dave123@outlook.com" required/>
 			    </div>
-                <div class="row">
-			        <div class="col-12">
-				        <label for="password">Password: </label>
-				        <input id="password" name="password" type="password" class="" minlength="5" maxlength="15" required/>
-                    </div>
+                <div class="form-group">
+                    <label for="password">Password: (min 5 characters)</label>
+                    <input id="password" name="password" type="password" class="form-control" minlength="5" maxlength="15" required/>
 			    </div>
-                <div class="row">
-			        <div class="col-12">
-				        <label for="confirm_password">Confirm Password: </label>
-				        <input id="confirm_password" name="confirm_password" type="password" class="" minlength="5" maxlength="15" required/>
-                    </div>
+                <div class="form-group">
+                    <label for="confirm_password">Confirm Password: </label>
+                    <input id="confirm_password" name="confirm_password" type="password" class="form-control" minlength="5" maxlength="15" required/>
 			    </div>
-                <div class="row">
-                    <button type="submit">Create Account</button>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Create Account</button>
                 </div>
 	        </form>
-        </div>
-        <div class="row">
             {% with messages = get_flashed_messages() %}
                 {% if messages %}
-                    <ul>
+                <div class="col-12 center">
+                    <ul class="flashed-messages">
                     {% for message in messages %}
                         <li>{{ message }}</li>
                     {% endfor %}
                     </ul>
+                </div>
                 {% endif %}
             {% endwith %}
         </div>

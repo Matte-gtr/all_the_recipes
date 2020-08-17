@@ -77,7 +77,8 @@ def get_categories():
 @app.route("/user/create_account", methods=["GET"])
 def create_account():
     """ displays the create account page/form """
-    return render_template('create_account.html')
+    return render_template('create_account.html',
+                           header="Create Account")
 
 
 @app.route("/user/create_account/post", methods=["POST"])
