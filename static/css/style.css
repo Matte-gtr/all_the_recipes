@@ -115,6 +115,12 @@ body {
     height: 80vh;
 }
 
+/*-----------------login & create account-----------------*/
+
+.w100-md-70 {
+    max-width: 550px
+    }
+
 /*-----------------nav bar & search bar-----------------*/
 
 #site-banner {
