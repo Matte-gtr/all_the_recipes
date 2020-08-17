@@ -10,7 +10,7 @@ $(document).ready(function(){
     });
 
     $('.add-method').click(function(){
-        let newMethodField = '<div><input name="method" type="text" class="form-control short-field" /><button type="button" class="btn btn-outline-primary btn-sm remove-method remove-button">-</button></div>';
+        let newMethodField = '<div><input name="method" type="text" class="form-control mid-field" /><button type="button" class="btn btn-outline-primary btn-sm remove-method remove-button">-</button></div>';
         $('#method-wrapper').append(newMethodField);
     });
 

@@ -288,6 +288,11 @@ body {
     width: 70%;
 }
 
+.mid-field {
+    display: inline-block;
+    width: 85%;
+}
+
 .add-button {
     width: 120px;
     margin-bottom: 4px;
