@@ -34,7 +34,7 @@
 						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 						Categrories
 					</a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+					<div class="dropdown-menu dropdown-orange" aria-labelledby="navbarDropdown">
                     {% for cat in categories %}
 						<a class="dropdown-item" href="{{ url_for('recipes_by_category', category=cat.category_name) }}">{{ cat.category_name.capitalize() }}</a>
 					{% endfor %}
@@ -48,7 +48,7 @@
 						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         {{ session['username'] }}
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <div class="dropdown-menu dropdown-green" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="{{ url_for('create_recipe') }}">Create recipe</a>
                         <a class="dropdown-item" href="{{ url_for('user_recipes', owner=session['username']) }}">My recipes</a>
                         <a class="dropdown-item" href="{{ url_for('logout') }}">Log out</a>

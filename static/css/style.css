@@ -178,6 +178,16 @@ body {
     padding: 16.6vh 5px;
 }
 
+.dropdown-green {
+    border: 5px solid #28a745;
+    left: -16px;
+}
+
+.dropdown-orange {
+    border: 5px solid #f78f2e;
+    left: -16px;
+}
+
 /*-----------------home page / recipe display-----------------*/
 
 .header {
