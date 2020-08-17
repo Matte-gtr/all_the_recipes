@@ -109,7 +109,7 @@ taken and the passwords match, a new user is created in the database """
 @app.route("/user/login", methods=["GET"])
 def user_login():
     """ displays the login page/form """
-    return render_template('user_login.html')
+    return render_template('user_login.html', header="Login")
 
 
 @app.route("/user/login/post", methods=["POST"])

@@ -99,6 +99,22 @@ body {
     padding-left: 17px;
 }
 
+.atr-form {
+    width: 100%;
+    max-width: 800px;;
+    margin: 0 auto;
+    background-color: rgba(0,0,0,0.6);
+    padding: 10px;
+}
+
+.no-bg {
+    background: none;
+}
+
+.full-screen {
+    height: 80vh;
+}
+
 /*-----------------nav bar & search bar-----------------*/
 
 #site-banner {
@@ -263,14 +279,6 @@ body {
 
 /*-----------------create/edit recipe-----------------*/
 
-.recipe-form {
-    width: 100%;
-    max-width: 800px;;
-    margin: 0 auto;
-    background-color: rgba(0,0,0,0.6);
-    padding: 10px;
-}
-
 .form-container {
     padding: 10px;
 }
@@ -303,6 +311,12 @@ body {
     background-size: cover;
 }
 
+.flashed-messages {
+    list-style: none;
+    padding: 0;
+    text-align: center;
+}
+
 /*-----------------media queries-----------------*/
 
 @media (min-width: 768px) {
@@ -311,6 +325,12 @@ body {
     }
     .green-hover {
     padding: 0 5px;
+    }
+}
+
+@media (min-width: 670px) {
+    .w100-md-70 {
+    width: 70%;
     }
 }
 
