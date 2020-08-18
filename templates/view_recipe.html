@@ -1,15 +1,39 @@
 {% extends 'base.html' %}
     {% block content %}
-    <div class="container">
-        <div class="row">
-            <img src="{{ recipe.image_url }}" onerror="this.src='/static/images/ATR-default.jpg'">
+    <main class="container-fluid recipe-background">
+        <div class="dark-overlay">
+            <div class="container paper">
+                <div class="light-overlay">
+                    <div class="row">
+                        <div class="col-12 col-md-8 sm-full-screen">
+                            <div class="img-container">
+                                <img src="{{ recipe.image_url }}" onerror="this.src='/static/images/ATR-default.jpg'" class="view-recipe-img">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 text-right">
+                            <h3 class="recipe-title">{{ recipe.recipe_name }}</h3>
+                        </div>
+                    </div>
+                    <div class="row info-container">
+                        <div class="recipe-info col-12 col-md-6 col-lg-4"><i class="far fa-clock"></i><span> Prep time: {{ recipe.preparation_time }} minutes</span></div>
+                        <div class="recipe-info col-12 col-md-6 col-lg-4"><i class="far fa-clock"></i><span> Cook time: {{ recipe.cook_time }} minutes</span></div>
+                        <div class="recipe-info col-12 col-md-6 col-lg-4"><i class="fas fa-user"></i><span> Serves: {{ recipe.servings }}</span></div>
+                    </div>
+                    <div class="row info-container">
+                        <div class="col-12">
+                            <p class="recipe-description">{{ recipe.description }}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        {% if recipe.owner == session['username'] %}
+                        <a class="btn btn-primary" href="{{ url_for('edit_recipe', recipe_id=recipe._id) }}" role="button">Edit</a>
+                        <a class="btn btn-primary" href="#" role="button">Delete</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="row">
-            <h3>{{ recipe.recipe_name }}</h3>
-        </div>
-        {% if recipe.owner == session['username'] %}
-            <a class="btn btn-primary" href="{{ url_for('edit_recipe', recipe_id=recipe._id) }}" role="button">Edit</a>
-            <a class="btn btn-primary" href="#" role="button">Delete</a>
-        {% endif %}
-    </div>
+    </main>
     {% endblock %}
