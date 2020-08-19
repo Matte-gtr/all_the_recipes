@@ -5,6 +5,11 @@
             <div class="container paper">
                 <div class="light-overlay">
                     <div class="row">
+                        <div class="col-12">
+                            <h3 class="recipe-category">{{ recipe.category.capitalize() }} Recipe</h3>
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col-12 col-md-8 sm-full-screen">
                             <div class="img-container">
                                 <img src="{{ recipe.image_url }}" onerror="this.src='/static/images/ATR-default.jpg'" class="view-recipe-img">
@@ -25,6 +30,34 @@
                         <div class="col-12">
                             <p class="recipe-description">{{ recipe.description }}</p>
                         </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-6 info-container">
+                            <h4 class="info-header">Ingredients:</h4>
+                            <ul>
+                            {% for ingredient in recipe.ingredients %}
+                                <li>{{ ingredient }}</li>
+                            {% endfor %}
+                            </ul>
+                        </div>
+                        <div class="col-12 col-md-6 info-container">
+                            <h4 class="info-header">Required Tools:</h4>
+                            <ul>
+                            {% for tool in recipe.required_tools %}
+                                <li>{{ tool }}</li>
+                            {% endfor %}
+                            </ul>
+                        </div>
+                        <div class="row info-container">
+                        <div class="col-12">
+                            <h4 class="info-header">Method:</h4>
+                            <ol>
+                            {% for step in recipe.method %}
+                                <li>{{ step }}</li>
+                            {% endfor %}
+                            </ol>
+                        </div>
+                    </div>
                     </div>
                     <div class="row">
                         {% if recipe.owner == session['username'] %}

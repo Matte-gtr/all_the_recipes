@@ -41,9 +41,9 @@ def home_page():
                            pagination=pagination)
 
 
-@app.route("/about")
-def about():
-    return render_template('about.html')
+@app.route("/tools")
+def tools():
+    return render_template('tools.html')
 
 
 @app.route("/recipes/search", methods=["GET", "POST"])
