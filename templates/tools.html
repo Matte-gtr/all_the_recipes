@@ -1,7 +1,31 @@
 {% extends 'base.html' %}
     {% block content %}
-    <div class="container">
-        <h1>About Page</h1>
-        <p>Some info about the website </p>
-    </div>
+    <main class="container-fluid dark-theme">
+        <div class="container">
+            <div class="">
+                <div class="row">
+                    <div class="col-12">
+                        <h1 class="header"><div class="lakeland">LAKELAND</div>Tools and Utensils</h1>
+                        <hr class="nine-width-hr">
+                    </div>
+                </div>
+                <section class="row">
+                    <div class="col-12">
+                        <h3 class="section-title">Chopping Boards</h3>
+                        <p class="section-description">How many times a day do you reach for a board? Whether you’re slicing the breakfast loaf, 
+                        knocking up a quick snack, laying out a lunchtime charcuterie selection, or prepping meat for 
+                        dinner: quality chopping boards are essential!</p>
+                        <div class="image-stack-container">
+                            <img src="/static/images/tools/chopping-board.jfif" class="image-stack-1">
+                            <img src="/static/images/tools/chopping-board1.jfif" class="image-stack-2">
+                            <img src="/static/images/tools/chopping-board2.jfif" class="image-stack-3">
+                        </div>
+                        <div class="div">
+                            <a class="btn btn-primary" href="https://www.lakeland.co.uk/in-the-kitchen/cutting-and-chopping/chopping-boards-and-racks/" target="_blank">View Range</a>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
     {% endblock %}

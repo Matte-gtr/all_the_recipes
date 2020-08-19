@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Rock+Salt&family=Source+Serif+Pro:ital@1&family=Alata&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Rock+Salt&family=Russo+One&family=Source+Serif+Pro:ital@1&family=Alata&display=swap');
 
 /*-----------------general/re-usable styles-----------------*/
 
@@ -71,32 +71,6 @@ body {
 .dark-theme {
     background-color: #3a3a3a;
     color: #fafafa;
-}
-
-.pagination-page-info {
-    padding: .6em;
-    padding-left: 17px;
-    width: 100%;
-    margin: .5em;
-    margin-left: 0;
-    font-size: 14px;
-}
-
-.pagination-page-info b {
-    color: black;
-    background: #6aa6ed;
-    padding-left: 2px;
-    padding: .1em .25em;
-    font-size: 150%;
-}
-
-.page-link {
-    color: #000000;
-    font-weight: 700;
-}
-
-.pagination {
-    padding-left: 17px;
 }
 
 .atr-form {
@@ -174,7 +148,8 @@ body {
     margin-left: -50px;
     width: 50px;
     border-radius: 12%;
-    margin-bottom: 2px;
+    margin-bottom: 3px;
+    height: 40px;
 }
 
 .user-expand-button {
@@ -315,6 +290,33 @@ body {
     bottom: 16px;
 }
 
+
+.pagination-page-info {
+    padding: .6em;
+    padding-left: 17px;
+    width: 100%;
+    margin: .5em;
+    margin-left: 0;
+    font-size: 14px;
+}
+
+.pagination-page-info b {
+    color: black;
+    background: #6aa6ed;
+    padding-left: 2px;
+    padding: .1em .25em;
+    font-size: 150%;
+}
+
+.page-link {
+    color: #000000;
+    font-weight: 700;
+}
+
+.pagination {
+    padding-left: 17px;
+}
+
 /*-----------------create/edit recipe-----------------*/
 
 .form-container {
@@ -423,12 +425,57 @@ body {
     font-size: 25px;
 }
 
-.recipe-description {
-
-}
-
 .info-header {
     font-weight: 600;
+}
+
+/*-----------------tools-----------------*/
+
+.lakeland {
+    font-family: "Russo One";
+    color: #2c314a;
+    font-size: 40px;
+    text-shadow: -1px -1px 0 #ececec, 1px -1px 0 #ececec, -1px 1px 0 #ececec, 1px 1px 0 #ececec;
+}
+
+.section-title {
+    padding: 15px;
+}
+
+.section-description {
+    padding: 0 15px 15px;
+}
+
+.image-stack-container {
+    position: relative;
+    padding-left: 7vw;
+    padding-bottom: 20px;
+}
+
+.image-stack-1 {
+    box-shadow: 2px 2px 7px #f5f3f0;
+    width: 30vw;
+    border: 0.1vw solid #3a3a3a;
+}
+
+.image-stack-2 {
+    box-shadow: 4px 4px 7px #f5f3f0;
+    width: 25vw;
+    border: 0.1vw solid #3a3a3a;
+    position: absolute;
+    top: 4vw;
+    left: 33vw;
+    z-index: 1;
+}
+
+.image-stack-3 {
+    box-shadow: 4px 4px 7px #f5f3f0;
+    width: 20vw;
+    border: 0.1vw solid #3a3a3a;
+    position: absolute;
+    top: 8vw;
+    left: 54vw;
+    z-index: 2;
 }
 
 /*-----------------media queries-----------------*/
@@ -437,6 +484,9 @@ body {
         .recipe-title {
     font-size: 45px;
     padding-top: 25px;
+    }
+    .lakeland {
+        font-size: 66px;
     }
 }
 
