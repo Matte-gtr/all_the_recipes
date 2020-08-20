@@ -418,6 +418,10 @@ body {
     font-family: "Rock Salt", sans-serif;
 }
 
+.img-container {
+    position: relative;
+}
+
 .view-recipe-img {
     width: 100%;
     border: 3px solid #484848;

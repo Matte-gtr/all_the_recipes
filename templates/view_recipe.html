@@ -31,8 +31,8 @@
                             <p class="recipe-description">{{ recipe.description }}</p>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-12 col-md-6 info-container">
+                    <div class="row info-container">
+                        <div class="col-12 col-md-6">
                             <h4 class="info-header">Ingredients:</h4>
                             <ul>
                             {% for ingredient in recipe.ingredients %}
@@ -40,7 +40,9 @@
                             {% endfor %}
                             </ul>
                         </div>
-                        <div class="col-12 col-md-6 info-container">
+                    </div>
+                    <div class="row info-container">
+                        <div class="col-12 col-md-6">
                             <h4 class="info-header">Required Tools:</h4>
                             <ul>
                             {% for tool in recipe.required_tools %}
@@ -48,7 +50,8 @@
                             {% endfor %}
                             </ul>
                         </div>
-                        <div class="row info-container">
+                    </div>
+                    <div class="row info-container">
                         <div class="col-12">
                             <h4 class="info-header">Method:</h4>
                             <ol>
@@ -57,7 +60,6 @@
                             {% endfor %}
                             </ol>
                         </div>
-                    </div>
                     </div>
                     <div class="row">
                         {% if recipe.owner == session['username'] %}
