@@ -260,6 +260,15 @@ def edit_recipe(recipe_id):
                            title="Edit Recipe")
 
 
+@app.route('/recipes/remove_recipe/<recipe_id>', methods=['GET', 'POST'])
+def remove_recipe(recipe_id):
+    """Removes the recipe from public view and adds it to the users
+    'Removed recipes'"""
+    mongo.db.recipes.update({'_id': ObjectId(recipe_id)},
+                            {'$set': {'active': False}})
+    return redirect(url_for('home_page'))
+
+
 @app.route('/recipes/update_recipe/<recipe_id>', methods=["POST"])
 def update_recipe(recipe_id):
     """ updates a recipe using recipe_id based on the information input into the
