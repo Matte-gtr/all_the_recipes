@@ -438,44 +438,54 @@ body {
     text-shadow: -1px -1px 0 #ececec, 1px -1px 0 #ececec, -1px 1px 0 #ececec, 1px 1px 0 #ececec;
 }
 
+.tool-section {
+    padding: 15px 0;
+    background-color: #484847;
+}
+
 .section-title {
-    padding: 15px;
+    padding-bottom: 15px;
 }
 
 .section-description {
-    padding: 0 15px 15px;
+    padding-bottom: 15px;
 }
 
 .image-stack-container {
     position: relative;
-    padding-left: 7vw;
+    padding-left: 5%;
     padding-bottom: 20px;
 }
 
 .image-stack-1 {
     box-shadow: 2px 2px 7px #f5f3f0;
-    width: 30vw;
+    width: 40%;
     border: 0.1vw solid #3a3a3a;
 }
 
 .image-stack-2 {
     box-shadow: 4px 4px 7px #f5f3f0;
-    width: 25vw;
+    width: 32%;
     border: 0.1vw solid #3a3a3a;
     position: absolute;
-    top: 4vw;
-    left: 33vw;
+    top: 11%;
+    left: 38%;
     z-index: 1;
 }
 
 .image-stack-3 {
     box-shadow: 4px 4px 7px #f5f3f0;
-    width: 20vw;
+    width: 25%;
     border: 0.1vw solid #3a3a3a;
     position: absolute;
-    top: 8vw;
-    left: 54vw;
+    top: 25%;
+    left: 65%;
     z-index: 2;
+}
+
+.external-link-btn {
+    text-align: right;
+    margin-right: 10px;
 }
 
 /*-----------------media queries-----------------*/
