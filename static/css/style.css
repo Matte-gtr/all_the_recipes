@@ -162,6 +162,7 @@ body {
 
 .user-expand-button {
     background-color: #d4d4d4;
+    color: #000000;
 }
 
 .btn-outline-success {
@@ -196,7 +197,19 @@ body {
 
 .dropdown-orange {
     border: 5px solid #f78f2e;
-    left: -16px;
+    left: -40px;
+}
+
+.navbar-dark .navbar-nav .dark-text {
+    color: #010101;
+}
+
+.navbar-dark .navbar-nav .dark-text:visited {
+    color: #010101;
+}
+
+.bg-dark {
+    border-bottom: 1px solid #fafafa;
 }
 
 /*-----------------home page / recipe display-----------------*/
@@ -502,6 +515,30 @@ body {
 .external-link-btn {
     text-align: right;
     margin-right: 10px;
+}
+
+/*-----------------footer-----------------*/
+
+.footer-container {
+    height: 100px;
+    background-color: #272727;
+    color: #fafafa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+}
+
+.media-link {
+    display: inline-block;
+    font-size: 22px;
+    padding: 5px 11px;
+    color: #fafafa;
+    transition: color .5s ease-in-out;
+}
+
+.media-link:hover {
+    color: #fb840a;
 }
 
 /*-----------------media queries-----------------*/
