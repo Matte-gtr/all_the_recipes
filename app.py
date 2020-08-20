@@ -214,7 +214,7 @@ def recipes_by_category(category):
 
 @app.route('/recipes/search/user/<owner>')
 def user_recipes(owner):
-    """ displays a list of all the recipes created by the current user """
+    """displays a list of all the active recipes created by the current user"""
     page = int(request.args.get('page', 1))
     per_page = 12
     offset = (page - 1) * per_page
@@ -231,9 +231,34 @@ def user_recipes(owner):
     return render_template('home_page.html', recipes=list(recipes),
                            header=f"All {owner.capitalize()} Recipes",
                            error_message=f"{owner.capitalize()}\
-                            currently has no recipes",
+                            currently has no active recipes",
                            pagination=pagination,
                            title=f"{owner.capitalize()} Recipes")
+
+
+@app.route('/recipes/search/user/<owner>/removed')
+def removed_recipes(owner):
+    """ displays a list of all the removed recipes created by the
+    current user """
+    page = int(request.args.get('page', 1))
+    per_page = 12
+    offset = (page - 1) * per_page
+    search = False
+    q = request.args.get('q')
+    if q:
+        search = True
+    username = session['username'].lower()
+    recipes = mongo.db.recipes.find({'active': False, 'owner': username}).sort(
+        'updated_on', pymongo.DESCENDING).limit(per_page).skip(offset)
+    pagination = Pagination(page=page, per_page=per_page, offset=offset,
+                            total=recipes.count(), css_framework='bootstrap4',
+                            search=search, record_name='recipes')
+    return render_template('home_page.html', recipes=list(recipes),
+                           header=f"All {owner.capitalize()} Removed Recipes",
+                           error_message=f"{owner.capitalize()}\
+                            currently has no inactive recipes",
+                           pagination=pagination,
+                           title=f"{owner.capitalize()} Removed Recipes")
 
 
 @app.route('/recipes/view_recipe/<recipe_id>')
@@ -266,6 +291,14 @@ def remove_recipe(recipe_id):
     'Removed recipes'"""
     mongo.db.recipes.update({'_id': ObjectId(recipe_id)},
                             {'$set': {'active': False}})
+    return redirect(url_for('home_page'))
+
+
+@app.route('/recipes/re-publish_recipe/<recipe_id>', methods=['GET', 'POST'])
+def republish_recipe(recipe_id):
+    """Adds the recipe back into public view"""
+    mongo.db.recipes.update({'_id': ObjectId(recipe_id)},
+                            {'$set': {'active': True}})
     return redirect(url_for('home_page'))
 
 
