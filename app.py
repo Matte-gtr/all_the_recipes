@@ -165,6 +165,7 @@ def insert_recipe():
     a new doument in the recipes collection to store the data
     (along with the time/date the recipe was created and last edited),
     then redirects the user back to the home page """
+    owner = session['username']
     recipes = mongo.db.recipes
     current_time = datetime.datetime.now().strftime('%x %X')
     recipes.insert_one({
@@ -180,9 +181,10 @@ def insert_recipe():
         'image_url': request.form.get("image_url"),
         'created_on': current_time,
         'updated_on': current_time,
-        'owner': session['username'].lower()
+        'owner': session['username'].lower(),
+        'active': True
     })
-    return redirect(url_for('home_page'))
+    return redirect(url_for('user_recipes', owner=owner))
 
 
 @app.route('/recipes/search/<category>')
