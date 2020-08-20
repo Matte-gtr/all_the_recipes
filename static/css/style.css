@@ -231,6 +231,8 @@ body {
     height: 455px;
     margin: 10px;
     color: #000000;
+    border: 1px solid #2d2d2d;
+    border-radius: 5px;
 }
 
 .card-hover {
@@ -287,7 +289,7 @@ body {
 
 .info-wrap {
     position: absolute;
-    bottom: 16px;
+    bottom: 25px;
 }
 
 
@@ -319,6 +321,8 @@ body {
 
 .container .d-flex {
     background-color: #484847;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 /*-----------------create/edit recipe-----------------*/

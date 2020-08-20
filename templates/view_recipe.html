@@ -61,8 +61,10 @@
                     </div>
                     <div class="row">
                         {% if recipe.owner == session['username'] %}
-                        <a class="btn btn-primary" href="{{ url_for('edit_recipe', recipe_id=recipe._id) }}" role="button">Edit</a>
-                        <a class="btn btn-primary" href="#" role="button">Delete</a>
+                        <div class="col-6 center p-3">
+                            <a class="btn btn-primary" href="{{ url_for('edit_recipe', recipe_id=recipe._id) }}" role="button">Edit</a>
+                            <a class="btn btn-primary" href="#" role="button">Delete</a>
+                        </div>
                         {% endif %}
                     </div>
                 </div>
