@@ -38,12 +38,14 @@ def home_page():
     return render_template('home_page.html',
                            recipes=list(recipes),
                            header="Check out our latest recipes",
-                           pagination=pagination)
+                           pagination=pagination,
+                           title="Home")
 
 
 @app.route("/tools")
 def tools():
-    return render_template('tools.html')
+    return render_template('tools.html',
+                           title="Tools")
 
 
 @app.route("/recipes/search", methods=["GET", "POST"])
@@ -65,7 +67,8 @@ def text_search():
     return render_template('home_page.html', recipes=list(recipes),
                            error_message=f'No recipes match the \
                                search "{search}"', pagination=pagination,
-                           header=f'Recipes containing "{search}"')
+                           header=f'Recipes containing "{search}"',
+                           title=f'"{search}" Results')
 
 
 @app.context_processor
@@ -78,7 +81,8 @@ def get_categories():
 def create_account():
     """ displays the create account page/form """
     return render_template('create_account.html',
-                           header="Create Account")
+                           header="Create Account",
+                           title="Create Account")
 
 
 @app.route("/user/create_account/post", methods=["POST"])
@@ -110,7 +114,8 @@ taken and the passwords match, a new user is created in the database """
 @app.route("/user/login", methods=["GET"])
 def user_login():
     """ displays the login page/form """
-    return render_template('user_login.html', header="Login")
+    return render_template('user_login.html', header="Login",
+                           title="Login")
 
 
 @app.route("/user/login/post", methods=["POST"])
@@ -150,7 +155,8 @@ def create_recipe():
     input fields to create a new recipe """
     return render_template('create_recipe.html',
                            cats=mongo.db.categories.find(),
-                           header="Create a Recipe")
+                           header="Create a Recipe",
+                           title="Create a Recipe")
 
 
 @app.route("/recipes/create_recipe/post", methods=['POST'])
@@ -198,7 +204,8 @@ def recipes_by_category(category):
     return render_template('home_page.html', recipes=list(recipes),
                            header="All " + category.capitalize() + " Recipes",
                            error_message=f"No results for \
-                           {category.capitalize()}", pagination=pagination)
+                           {category.capitalize()}", pagination=pagination,
+                           title=f"{category.capitalize()} Recipes")
 
 
 @app.route('/recipes/search/user/<owner>')
@@ -221,16 +228,18 @@ def user_recipes(owner):
                            header=f"All {owner.capitalize()} Recipes",
                            error_message=f"{owner.capitalize()}\
                             currently has no recipes",
-                           pagination=pagination)
+                           pagination=pagination,
+                           title=f"{owner.capitalize()} Recipes")
 
 
 @app.route('/recipes/view_recipe/<recipe_id>')
 def view_recipe(recipe_id):
     """ generates a display of all the information
     related to a particular recipe based on the recipe_id"""
+    recipe = mongo.db.recipes.find_one({'_id': ObjectId(recipe_id)})
     return render_template('view_recipe.html',
-                           recipe=mongo.db.recipes.find_one({
-                            '_id': ObjectId(recipe_id)}))
+                           recipe=recipe,
+                           title="Recipe")
 
 
 @app.route('/recipes/edit_recipe/<recipe_id>')
@@ -243,7 +252,8 @@ def edit_recipe(recipe_id):
                            recipe=mongo.db.recipes.find_one({
                             '_id': ObjectId(recipe_id)}),
                            cats=mongo.db.categories.find(),
-                           header="Edit Recipe")
+                           header="Edit Recipe",
+                           title="Edit Recipe")
 
 
 @app.route('/recipes/update_recipe/<recipe_id>', methods=["POST"])
