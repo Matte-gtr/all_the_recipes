@@ -2,8 +2,7 @@
     {% block content %}
 
     <!--search bar-->
-    <div class="main"></div>
-        <div class="container-fluid search-hide" id="search-container">
+        <div class="container-fluid" id="search-container">
             <div class="row">
                 <div class="col-12 center search-background">
                     <div class="search-wrapper">
@@ -17,26 +16,28 @@
         </div>
 
         <!--header-->
-        <section class="container-fluid dark-theme">
-            <div class="row">
-                <div class="col-12 no-padding">
-                    {% if request.endpoint == 'home_page' %}
-                        <h1 class="header">{{ header }}</h1>
-                        <hr class="nine-width-hr">
-                    {% else %}
-                        <div class="container">
-                            <h3 class="search-header">{{ header }}</h3>
-                            <hr class="nine-width-hr-left">
-                                {{ pagination.info }}
-                                {{ pagination.links }}
-                        </div>
-                    {% endif %}
+        <section class="container-fluid no-padding dark-theme">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 no-padding">
+                        {% if request.endpoint == 'home_page' %}
+                            <h1 class="header">{{ header }}</h1>
+                            <hr class="nine-width-hr">
+                        {% else %}
+                            <div class="container">
+                                <h3 class="search-header">{{ header }}</h3>
+                                <hr class="nine-width-hr-left">
+                                {% if recipes|length > 0 %}
+                                    {{ pagination.info }}
+                                    {{ pagination.links }}
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                    </div>
                 </div>
-            </div>
 
-            <!--recipes/results display-->
-            {% if recipes|length > 0 %}
-            <div class="container no-padding">
+                <!--recipes/results display-->
+                {% if recipes|length > 0 %}
                 <div class="row d-flex">
                     {% for recipe in recipes %}
                     <div class="col-12 col-lg-6 col-xl-4 no-padding d-flex justify-content-center">
@@ -59,25 +60,23 @@
                     </div>
                     {% endfor %}
                 </div>
-            </div>
-            {% else %}
-            <div class="container">
+                {% else %}
                 <div class="row">
-                    <h2>{{ error_message }}</h2>
+                    <h2 class="pl-4">{{ error_message }}</h2>
                 </div>
-            </div>
-            {% endif %}
-            <div class="row">
-                <div class="col-12 no-padding">
-                    <div class="container">
-                        {{ pagination.info }}
+                {% endif %}
+                <div class="row">
+                    <div class="col-12 no-padding">
+                        <div class="container">
+                            {{ pagination.info }}
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-12 no-padding">
-                    <div class="container">
-                        {{ pagination.links }}
+                <div class="row">
+                    <div class="col-12 no-padding">
+                        <div class="container">
+                            {{ pagination.links }}
+                        </div>
                     </div>
                 </div>
             </div>

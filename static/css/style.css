@@ -178,7 +178,7 @@ body {
 
 #search-field {
     background-color: rgba(9,9,9,0.5);
-    padding: 16.6vh 5px;
+    padding: 17vh 5px;
 }
 
 .dropdown-green {
@@ -315,6 +315,10 @@ body {
 
 .pagination {
     padding-left: 17px;
+}
+
+.container .d-flex {
+    background-color: #484847;
 }
 
 /*-----------------create/edit recipe-----------------*/

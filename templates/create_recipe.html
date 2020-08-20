@@ -8,7 +8,7 @@
         </div>
     </div>
 <!--Form-->
-    <div class="row bg-create-recipe">
+    <section class="row bg-create-recipe">
         <form action="{{ url_for('insert_recipe') }}" method="POST" class="atr-form">
             <div class="form-group">
                 <label for="recipe_name">Category: </label>
@@ -79,7 +79,7 @@
                 <button type="submit" class="btn btn-primary ml-3">Create recipe</button>
             </div>
         </form>
-    </div>
+    </section>
     <div class="row">
         {% with messages = get_flashed_messages() %} {% if messages %}
         <ul>
