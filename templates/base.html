@@ -29,6 +29,9 @@
 				<li class="nav-item orange-hover">
 					<a class="nav-link" href="{{ url_for('tools') }}">Tools</a>
 				</li>
+                <li class="nav-item orange-hover">
+					<a class="nav-link" href="{{ url_for('create_recipe') }}">Create Recipe</a>
+				</li>
 				<li class="nav-item orange-hover dropdown">
 					<a class="nav-link dropdown-toggle" href="#" id="category_dropdown" role="button"
 						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -54,8 +57,8 @@
                         <a class="dropdown-item" href="{{ url_for('logout') }}">Log out</a>
                     </div>
             {% else %}
-			    <div class="btn btn-success mr-1"><a href="{{ url_for('user_login') }}" class="no-decoration white-text">Login</a></div>
-                <div class="btn btn-success"><a href="{{ url_for('create_account') }}" class="no-decoration white-text">Sign Up</a></div>
+			    <div class="btn btn-primary mr-1"><a href="{{ url_for('user_login') }}" class="no-decoration white-text">Login</a></div>
+                <div class="btn btn-primary"><a href="{{ url_for('create_account') }}" class="no-decoration white-text">Sign Up</a></div>
             {% endif %}
 				</li>
             </ul>

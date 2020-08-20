@@ -111,6 +111,14 @@ body {
     padding-left: 15px;
 }
 
+.fs-18 {
+    font-size: 18px;
+}
+
+.btn {
+    box-shadow: 1px 1px 3px #2d2d2d;
+}
+
 /*-----------------login & create account-----------------*/
 
 .w100-md-70 {
@@ -321,8 +329,8 @@ body {
 
 .container .d-flex {
     background-color: #484847;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
 /*-----------------create/edit recipe-----------------*/

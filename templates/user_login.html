@@ -22,7 +22,9 @@
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">Login</button>
                 </div>
+                <p class="fs-18 center">Don't have an account? Create one <a href="{{ url_for('create_account') }}">Here</a></p>
             </form>
+            
         
             {% with messages = get_flashed_messages() %}
                 {% if messages %}
