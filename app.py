@@ -26,7 +26,7 @@ def home_page():
     page = int(request.args.get('page', 1))
     per_page = 12
     offset = (page - 1) * per_page
-    recipes = mongo.db.recipes.find().sort(
+    recipes = mongo.db.recipes.find({'active': True}).sort(
         'updated_on', pymongo.DESCENDING).limit(per_page).skip(offset)
     search = False
     q = request.args.get('q')
@@ -58,7 +58,8 @@ def text_search():
     if q:
         searchit = True
     search = request.form.get('search')
-    recipes = mongo.db.recipes.find({'$text': {'$search': search}}).limit(
+    recipes = mongo.db.recipes.find({'active': True,
+                                    '$text': {'$search': search}}).limit(
         per_page).skip(offset)
     pagination = Pagination(page=page, per_page=per_page, offset=offset,
                             total=recipes.count(), css_framework='bootstrap4',
@@ -198,7 +199,8 @@ def recipes_by_category(category):
     q = request.args.get('q')
     if q:
         search = True
-    recipes = mongo.db.recipes.find({'category': category}).sort(
+    recipes = mongo.db.recipes.find({'active': True,
+                                    'category': category}).sort(
         'updated_on', pymongo.DESCENDING).limit(per_page).skip(offset)
     pagination = Pagination(page=page, per_page=per_page, offset=offset,
                             total=recipes.count(), css_framework='bootstrap4',
@@ -221,7 +223,7 @@ def user_recipes(owner):
     if q:
         search = True
     username = session['username'].lower()
-    recipes = mongo.db.recipes.find({'owner': username}).sort(
+    recipes = mongo.db.recipes.find({'active': True, 'owner': username}).sort(
         'updated_on', pymongo.DESCENDING).limit(per_page).skip(offset)
     pagination = Pagination(page=page, per_page=per_page, offset=offset,
                             total=recipes.count(), css_framework='bootstrap4',
@@ -279,7 +281,7 @@ def update_recipe(recipe_id):
                                     'preparation_time'),
                                 'cook_time': request.form.get('cook_time'),
                                 'image_url': request.form.get("image_url"),
-                                'updated_on': current_time,
+                                'updated_on': current_time
                             }})
     return redirect(url_for('view_recipe', recipe_id=recipe_id))
 
