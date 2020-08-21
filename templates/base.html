@@ -30,7 +30,7 @@
 					<a class="nav-link" href="{{ url_for('tools') }}">Tools</a>
 				</li>
                 <li class="nav-item orange-hover">
-					<a class="nav-link" href="{{ url_for('create_recipe') }}">Create Recipe</a>
+					<a class="nav-link" href="{{ url_for('create_recipe') }}">Add Recipe</a>
 				</li>
 				<li class="nav-item orange-hover dropdown">
 					<a class="nav-link dropdown-toggle" href="#" id="category_dropdown" role="button"
@@ -49,7 +49,11 @@
 				<li class="nav-item dropdown green-hover user-expand-button">
                     <a class="nav-link dropdown-toggle dark-text" href="#" id="user_dropdown" role="button"
 						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        {{ session['username'] }}
+                        {% if (session['username']|length < 20 and session['username']|length > 7) %}
+                            {{ session['username'] }}
+                        {% else %}
+                            User Options
+                        {% endif %}
                     </a>
                     <div class="dropdown-menu dropdown-green" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="{{ url_for('user_recipes', owner=session['username']) }}">My Recipes</a>
