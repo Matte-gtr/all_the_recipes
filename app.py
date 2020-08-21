@@ -124,22 +124,20 @@ def login():
     """ (from "user_login" submit) checks if the username is in the
     database and if so, that the passwords match, if the username is present
     and the passwords match, the user is logged in """
+    next_url = request.form.get("next")
     existing_user = mongo.db.users.find_one({"user_name": request.form.get(
         'username').lower()})
     if existing_user:
         if check_password_hash(existing_user["password"],
                                request.form.get("password")):
             session['username'] = existing_user['user_name']
-            return redirect(url_for('home_page'))
+            return redirect(next_url or url_for('home_page'))
         else:
             flash('Incorrect password')
             return redirect(url_for('user_login'))
     else:
         flash('The username you entered does not exist')
         return redirect(url_for('user_login'))
-    return render_template('home_page.html', user=mongo.db.users.find_one(
-                            {'user_name': request.form.get('username').lower(
-                                )}))
 
 
 @app.route('/user/logout')
@@ -154,10 +152,14 @@ def logout():
 def create_recipe():
     """ opens the create recipe page with all the
     input fields to create a new recipe """
-    return render_template('create_recipe.html',
-                           cats=mongo.db.categories.find(),
-                           header="Create a Recipe",
-                           title="Create a Recipe")
+    if session.get('username') is None:
+        flash('You need to be logged in to do that')
+        return redirect(url_for('user_login', next=request.url))
+    else:
+        return render_template('create_recipe.html',
+                               cats=mongo.db.categories.find(),
+                               header="Create a Recipe",
+                               title="Create a Recipe")
 
 
 @app.route("/recipes/create_recipe/post", methods=['POST'])
