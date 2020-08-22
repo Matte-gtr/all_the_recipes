@@ -36,7 +36,9 @@
                             <h4 class="info-header">Ingredients:</h4>
                             <ul>
                             {% for ingredient in recipe.ingredients %}
-                                <li>{{ ingredient }}</li>
+                                {% if not ingredient == "" %}
+                                    <li>{{ ingredient }}</li>
+                                {% endif %}
                             {% endfor %}
                             </ul>
                         </div>
@@ -46,7 +48,9 @@
                             <h4 class="info-header">Required Tools:</h4>
                             <ul>
                             {% for tool in recipe.required_tools %}
-                                <li>{{ tool }}</li>
+                                {% if not tool == "" %}
+                                    <li>{{ tool }}</li>
+                                {% endif %}
                             {% endfor %}
                             </ul>
                         </div>
@@ -56,7 +60,9 @@
                             <h4 class="info-header">Method:</h4>
                             <ol>
                             {% for step in recipe.method %}
-                                <li>{{ step }}</li>
+                                {% if not step == "" %}
+                                    <li>{{ step }}</li>
+                                {% endif %}
                             {% endfor %}
                             </ol>
                         </div>
