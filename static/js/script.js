@@ -1,7 +1,8 @@
 $(document).ready(function(){
 
     $('.add-ingredient').click(function(){
-        let newIngredientField = '<div><input name="ingredients" type="text" class="form-control short-field" /><button type="button" class="btn btn-outline-primary btn-sm remove-ingredient remove-button">-</button></div>';
+        let newIngredientField = '<div><input name="ingredients" type="text" class="form-control short-field" />' +
+        '<button type="button" class="btn btn-warning btn-sm remove-ingredient remove-button">-</button></div>';
         $('#ingredient-wrapper').append(newIngredientField);
     });
 
@@ -10,7 +11,8 @@ $(document).ready(function(){
     });
 
     $('.add-method').click(function(){
-        let newMethodField = '<div><input name="method" type="text" class="form-control mid-field" /><button type="button" class="btn btn-outline-primary btn-sm remove-method remove-button">-</button></div>';
+        let newMethodField = '<div><input name="method" type="text" class="form-control mid-field" />' +
+        '<button type="button" class="btn btn-warning btn-sm remove-method remove-button">-</button></div>';
         $('#method-wrapper').append(newMethodField);
     });
 
@@ -19,7 +21,8 @@ $(document).ready(function(){
     });
 
     $('.add-tool').click(function(){
-        let newToolField = '<div><input name="tools" type="text" class="form-control short-field" /><button type="button" class="btn btn-outline-primary btn-sm remove-tool remove-button">-</button></div>';
+        let newToolField = '<div><input name="tools" type="text" class="form-control short-field" />' + 
+        '<button type="button" class="btn btn-warning btn-sm remove-tool remove-button">-</button></div>';
         $('#tools-wrapper').append(newToolField);
     });
 

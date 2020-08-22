@@ -377,8 +377,8 @@ body {
     margin-bottom: 3px;
     width: 30px;
     margin-left: 4px;
-    background-color: #007bff;
-    color: #fafafa;
+    font-size: 21px;
+    font-weight: 700;
 }
 
 .bg-create-recipe {
