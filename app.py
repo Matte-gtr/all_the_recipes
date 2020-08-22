@@ -19,7 +19,7 @@ app.secret_key = os.environ.get('SECRET_KEY')
 mongo = PyMongo(app)
 
 
-def search_helper():
+def pagination_helper():
     page = int(request.args.get('page', 1))
     per_page = 12
     offset = (page - 1) * per_page
@@ -30,7 +30,7 @@ def search_helper():
 @app.route("/get_recipes")
 def home_page():
     """ displays the home page as well as a list of available recipes"""
-    page, per_page, offset = search_helper()
+    page, per_page, offset = pagination_helper()
     recipes = mongo.db.recipes.find({'active': True}).sort(
         'updated_on', pymongo.DESCENDING).limit(per_page).skip(offset)
     search = False
@@ -56,7 +56,7 @@ def tools():
 
 @app.route("/recipes/search", methods=["POST"])
 def text_search():
-    page, per_page, offset = search_helper()
+    page, per_page, offset = pagination_helper()
     searchit = False
     q = request.args.get('q')
     if q:
@@ -197,7 +197,7 @@ def insert_recipe():
 def recipes_by_category(category):
     """ searches for all recipes with a chosen category from a drop down list,
     then displays those recipes on the home page """
-    page, per_page, offset = search_helper()
+    page, per_page, offset = pagination_helper()
     search = False
     q = request.args.get('q')
     if q:
@@ -243,7 +243,7 @@ def user_recipes(owner):
 def removed_recipes(owner):
     """ displays a list of all the removed recipes created by the
     current user """
-    page, per_page, offset = search_helper()
+    page, per_page, offset = pagination_helper()
     search = False
     q = request.args.get('q')
     if q:
