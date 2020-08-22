@@ -270,6 +270,7 @@ def view_recipe(recipe_id):
     recipe = mongo.db.recipes.find_one({'_id': ObjectId(recipe_id)})
     return render_template('view_recipe.html',
                            recipe=recipe,
+                           tools=tools,
                            title="Recipe")
 
 
@@ -293,6 +294,13 @@ def remove_recipe(recipe_id):
     'Removed recipes'"""
     mongo.db.recipes.update({'_id': ObjectId(recipe_id)},
                             {'$set': {'active': False}})
+    return redirect(url_for('home_page'))
+
+
+@app.route('/recipes/delete_recipe/<recipe_id>', methods=['GET', 'POST'])
+def delete_recipe(recipe_id):
+    """Permanently deletes the recipe from the database"""
+    mongo.db.recipes.delete_one({'_id': ObjectId(recipe_id)})
     return redirect(url_for('home_page'))
 
 

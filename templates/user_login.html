@@ -8,6 +8,18 @@
                 <hr class="nine-width-hr">
             </div>
         </div>
+        <!--flashed messages-->
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <div class="col-12 center">
+                <ul class="flashed-messages">
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+        {% endwith %}
         <!--Login form-->
         <div class="full-screen">
             <form action="{{ url_for('login') }}" method="POST" class="atr-form no-bg w100-md-70">
@@ -25,19 +37,6 @@
                 </div>
                 <p class="fs-18 center">Don't have an account? Create one <a href="{{ url_for('create_account') }}">Here</a></p>
             </form>
-            
-        
-            {% with messages = get_flashed_messages() %}
-                {% if messages %}
-                <div class="col-12 center">
-                    <ul class="flashed-messages">
-                    {% for message in messages %}
-                        <li>{{ message }}</li>
-                    {% endfor %}
-                    </ul>
-                </div>
-                {% endif %}
-            {% endwith %}
         </div>
     </div>
     {% endblock %}
