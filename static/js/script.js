@@ -25,6 +25,6 @@ $(document).ready(function(){
 
     $('#tools-wrapper').on('click', '.remove-tool', function(){
         $(this).parent('div').remove();
-    });  
+    });
 
 });

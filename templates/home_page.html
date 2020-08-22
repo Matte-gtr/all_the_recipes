@@ -16,7 +16,7 @@
         </div>
 
         <!--header-->
-        <section class="container-fluid no-padding dark-theme">
+        <section class="container-fluid no-padding dark-theme result-container">
             <div class="container">
                 <div class="row">
                     <div class="col-12 no-padding">
@@ -46,7 +46,7 @@
                                 <div class="image-container">
                                     <img class="card-image" src="{{ recipe.image_url }}" onerror="this.src='/static/images/ATR-default.jpg'">
                                 </div>
-                                <div class="card-type">RECIPE</div>
+                                <div class="card-type">{{ recipe.category.upper() }} RECIPE</div>
                                 <div class="heading-container">
                                     <h2 class="card-heading">{{ recipe.recipe_name.capitalize() }}</h2>
                                 </div>
@@ -68,14 +68,18 @@
                 <div class="row">
                     <div class="col-12 no-padding">
                         <div class="container">
-                            {{ pagination.info }}
+                            {% if recipes|length > 0 %}
+                                    {{ pagination.info }}
+                            {% endif %}
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-12 no-padding">
                         <div class="container">
-                            {{ pagination.links }}
+                            {% if recipes|length > 0 %}
+                                    {{ pagination.links }}
+                            {% endif %}
                         </div>
                     </div>
                 </div>

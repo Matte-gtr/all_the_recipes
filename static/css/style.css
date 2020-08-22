@@ -346,6 +346,10 @@ body {
     padding-bottom: 5px;
 }
 
+.result-container {
+    min-height: calc(60vh - 70px - 100px);
+}
+
 /*-----------------create/edit recipe-----------------*/
 
 .form-container {

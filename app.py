@@ -44,11 +44,12 @@ def home_page():
 
 @app.route("/tools")
 def tools():
+    """displays the tools page"""
     return render_template('tools.html',
                            title="Tools")
 
 
-@app.route("/recipes/search", methods=["GET", "POST"])
+@app.route("/recipes/search", methods=["POST"])
 def text_search():
     page = int(request.args.get('page', 1))
     per_page = 12
@@ -64,7 +65,6 @@ def text_search():
     pagination = Pagination(page=page, per_page=per_page, offset=offset,
                             total=recipes.count(), css_framework='bootstrap4',
                             search=searchit, record_name='recipes')
-    print(pagination)
     return render_template('home_page.html', recipes=list(recipes),
                            error_message=f'No recipes match the \
                                search "{search}"', pagination=pagination,
@@ -89,8 +89,8 @@ def create_account():
 @app.route("/user/create_account/post", methods=["POST"])
 def insert_account():
     """ (from "create_account" submit) checks if the username is already in the
-database and if the double entered passwords match, if the username is not
-taken and the passwords match, a new user is created in the database """
+    database and if the double entered passwords match, if the username is not
+    taken and the passwords match, a new user is created in the database """
     existing_user = mongo.db.users.find_one({"user_name": request.form.get(
         'username').lower()})
     if existing_user:
