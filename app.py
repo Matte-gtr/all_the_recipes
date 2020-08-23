@@ -20,6 +20,7 @@ mongo = PyMongo(app)
 
 
 def pagination_helper():
+    """ sets the variables for pagination on the home page / recipe display """
     page = int(request.args.get('page', 1))
     per_page = 12
     offset = (page - 1) * per_page
@@ -49,13 +50,14 @@ def home_page():
 
 @app.route("/tools")
 def tools():
-    """displays the tools page"""
+    """ displays the tools page """
     return render_template('tools.html',
                            title="Tools")
 
 
 @app.route("/recipes/search", methods=["POST"])
 def text_search():
+    """ returns a list of recipes based on the user input search criteria """
     page, per_page, offset = pagination_helper()
     searchit = False
     q = request.args.get('q')
