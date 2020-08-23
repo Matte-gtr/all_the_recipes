@@ -485,6 +485,10 @@ body {
     font-size: 16px;
 }
 
+.method-step {
+    padding-bottom: 25px;
+}
+
 /*-----------------tools-----------------*/
 
 .lakeland {
