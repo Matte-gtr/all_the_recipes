@@ -17,7 +17,7 @@
     <div class="spacer"></div>
 	<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
 		<a class="navbar-brand" href="{{url_for('home_page')}}"><span class="site-logo">All the Recipes</span></a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false">
             <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -37,7 +37,7 @@
 						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 						Categories
 					</a>
-					<div class="dropdown-menu dropdown-orange" aria-labelledby="navbarDropdown">
+					<div class="dropdown-menu dropdown-orange">
                     {% for cat in categories %}
 						<a class="dropdown-item" href="{{ url_for('recipes_by_category', category=cat.category_name) }}">{{ cat.category_name.capitalize() }}</a>
 					{% endfor %}
@@ -55,7 +55,7 @@
                             User Options
                         {% endif %}
                     </a>
-                    <div class="dropdown-menu dropdown-green" aria-labelledby="navbarDropdown">
+                    <div class="dropdown-menu dropdown-green">
                         <a class="dropdown-item" href="{{ url_for('user_recipes', owner=session['username']) }}">My Recipes</a>
                         <a class="dropdown-item" href="{{ url_for('removed_recipes', owner=session['username']) }}">Removed Recipes</a>
                         <a class="dropdown-item" href="{{ url_for('logout') }}">Log Out</a>
