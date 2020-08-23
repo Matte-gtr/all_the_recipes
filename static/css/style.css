@@ -468,6 +468,11 @@ body {
     font-weight: 600;
 }
 
+.tools-link {
+    margin-left: 20px;
+    font-size: 16px;
+}
+
 /*-----------------tools-----------------*/
 
 .lakeland {
