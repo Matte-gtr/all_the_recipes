@@ -1,6 +1,10 @@
+"""A Python Flask app that uses MongoDB and Pymongo to display recipes in a
+readable format and allows users to create an account and add/edit/delete
+their own recipes (CRUD)"""
 import os
-import pymongo
 import datetime
+import pymongo
+
 from flask import Flask, render_template, url_for, session, redirect,\
     flash, request, Blueprint
 from flask_pymongo import PyMongo
@@ -35,8 +39,8 @@ def home_page():
     recipes = mongo.db.recipes.find({'active': True}).sort(
         'updated_on', pymongo.DESCENDING).limit(per_page).skip(offset)
     search = False
-    q = request.args.get('q')
-    if q:
+    search_q = request.args.get('q')
+    if search_q:
         search = True
     pagination = Pagination(page=page, per_page=per_page, offset=offset,
                             total=recipes.count(), css_framework='bootstrap4',
@@ -60,13 +64,13 @@ def text_search():
     """ returns a list of recipes based on the user input search criteria """
     page, per_page, offset = pagination_helper()
     searchit = False
-    q = request.args.get('q')
-    if q:
+    search_q = request.args.get('q')
+    if search_q:
         searchit = True
     search = request.form.get('search')
     recipes = mongo.db.recipes.find({'active': True,
-                                    '$text': {'$search': search}}).limit(
-        per_page).skip(offset)
+                                     '$text': {'$search': search}}).limit(
+                                         per_page).skip(offset)
     pagination = Pagination(page=page, per_page=per_page, offset=offset,
                             total=recipes.count(), css_framework='bootstrap4',
                             search=searchit, record_name='recipes')
@@ -101,20 +105,18 @@ def insert_account():
     if existing_user:
         flash('This username is taken')
         return redirect(url_for('create_account'))
-    else:
-        if request.form.get('password') == \
-                request.form.get('confirm_password'):
-            mongo.db.users.insert_one({
-                "user_name": request.form.get('username').lower(),
-                "email_address": request.form.get('email'),
-                "password": generate_password_hash(
-                        request.form.get('password'))
-            })
-            flash("Account Created")
-            return redirect(url_for('user_login'))
-        else:
-            flash("Your passwords didn't match")
-            return redirect(url_for('create_account'))
+    if request.form.get('password') == \
+            request.form.get('confirm_password'):
+        mongo.db.users.insert_one({
+            "user_name": request.form.get('username').lower(),
+            "email_address": request.form.get('email'),
+            "password": generate_password_hash(
+                request.form.get('password'))
+        })
+        flash("Account Created")
+        return redirect(url_for('user_login'))
+    flash("Your passwords didn't match")
+    return redirect(url_for('create_account'))
 
 
 @app.route("/user/login", methods=["GET"])
@@ -137,12 +139,10 @@ def login():
                                request.form.get("password")):
             session['username'] = existing_user['user_name']
             return redirect(next_url or url_for('home_page'))
-        else:
-            flash('Incorrect password')
-            return redirect(url_for('user_login'))
-    else:
-        flash('The username you entered does not exist')
+        flash('Incorrect password')
         return redirect(url_for('user_login'))
+    flash('The username you entered does not exist')
+    return redirect(url_for('user_login'))
 
 
 @app.route('/user/logout')
@@ -160,11 +160,10 @@ def create_recipe():
     if session.get('username') is None:
         flash('You need to be logged in to do that')
         return redirect(url_for('user_login', next=request.url))
-    else:
-        return render_template('create_recipe.html',
-                               cats=mongo.db.categories.find(),
-                               header="Create a Recipe",
-                               title="Create a Recipe")
+    return render_template('create_recipe.html',
+                           cats=mongo.db.categories.find(),
+                           header="Create a Recipe",
+                           title="Create a Recipe")
 
 
 @app.route("/recipes/create_recipe/post", methods=['POST'])
@@ -201,12 +200,14 @@ def recipes_by_category(category):
     then displays those recipes on the home page """
     page, per_page, offset = pagination_helper()
     search = False
-    q = request.args.get('q')
-    if q:
+    search_q = request.args.get('q')
+    if search_q:
         search = True
     recipes = mongo.db.recipes.find({'active': True,
-                                    'category': category}).sort(
-        'updated_on', pymongo.DESCENDING).limit(per_page).skip(offset)
+                                     'category': category}).sort(
+                                         'updated_on',
+                                         pymongo.DESCENDING).limit(
+                                             per_page).skip(offset)
     pagination = Pagination(page=page, per_page=per_page, offset=offset,
                             total=recipes.count(), css_framework='bootstrap4',
                             search=search, record_name='recipes')
@@ -220,12 +221,10 @@ def recipes_by_category(category):
 @app.route('/recipes/search/user/<owner>')
 def user_recipes(owner):
     """displays a list of all the active recipes created by the current user"""
-    page = int(request.args.get('page', 1))
-    per_page = 12
-    offset = (page - 1) * per_page
+    page, per_page, offset = pagination_helper()
     search = False
-    q = request.args.get('q')
-    if q:
+    search_q = request.args.get('q')
+    if search_q:
         search = True
     username = session['username'].lower()
     recipes = mongo.db.recipes.find({'active': True, 'owner': username}).sort(
@@ -247,8 +246,8 @@ def removed_recipes(owner):
     current user """
     page, per_page, offset = pagination_helper()
     search = False
-    q = request.args.get('q')
-    if q:
+    search_q = request.args.get('q')
+    if search_q:
         search = True
     username = session['username'].lower()
     recipes = mongo.db.recipes.find({'active': False, 'owner': username}).sort(
@@ -283,7 +282,7 @@ def edit_recipe(recipe_id):
     (this is only visible to the user that created the recipe) """
     return render_template('edit_recipe.html',
                            recipe=mongo.db.recipes.find_one({
-                            '_id': ObjectId(recipe_id)}),
+                               '_id': ObjectId(recipe_id)}),
                            cats=mongo.db.categories.find(),
                            header="Edit Recipe",
                            title="Edit Recipe")
