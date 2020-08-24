@@ -42,49 +42,49 @@ The wireframes/initial mockups for the "All the Recipes" website can be found he
 
 ## Features
 
-* Home Page - This is the first page a user will see when visiting the site, the page displays all of the most recently updated recipes in the 
+* **Home Page** - This is the first page a user will see when visiting the site, the page displays all of the most recently updated recipes in the 
 form of "cards" that the user can click on to be directed to the recipe page containing the full details of the recipe. This page also displays  
 the search results for the ingredient search, user filter and category filter. There are 12 recipes displayed on the home page with pagination links
 at the bottom of the page to view older recipes
 
-* Tools Page - This page is accessed from the navbar and recipe pages, it contains an overview of some different types of tools/utensils relating 
+* **Tools Page** - This page is accessed from the navbar and recipe pages, it contains an overview of some different types of tools/utensils relating 
 to cooking and baking. The user can be directed to the website selling the tools by clicking on the "view range" button.
 
-* Add Recipe Page - This page can be accessed from the navbar, however the user will be redirected to the login page if they aren't currently
+* **Add Recipe Page** - This page can be accessed from the navbar, however the user will be redirected to the login page if they aren't currently
 logged in. This page contains a form that can be filled out by the user and upon submission of the form, this will be added to the list of recipes
 that can be viewed by all users.
 
-* Categories Dropdown - This is displayed in the form of a button on the navbar which when clicked, will reveal a list of all the available categories 
+* **Categories Dropdown** - This is displayed in the form of a button on the navbar which when clicked, will reveal a list of all the available categories 
 of active recipes on the site. When a category is clicked, the results are displayed in the same format as the home page recipes, but will only display
 the recipes matching that particular category.
 
-* Sign up button/page - This page is accessed from the navbar, only for users who aren't currently logged in. A user will be asked to choose a username,
+* **Sign up button/page** - This page is accessed from the navbar, only for users who aren't currently logged in. A user will be asked to choose a username,
 add their email address, input a password and confirm their password. If the user enters a username that is already taken, they will be notified of this
 and can choose a different username. Once the form is completed successfully, the user will be redirected to the login page so they can log in.
 
-* Login button/page - This page is accessed from the navbar, only for users who aren't currently logged in. A user will be asked to enter their username
+* **Login button/page** - This page is accessed from the navbar, only for users who aren't currently logged in. A user will be asked to enter their username
 and password to log in. If they enter an incorrect password or username, they will be notified of this and can try again. On successful completion of the
 form, they will be logged in a redirected to the home page, unless they were redirected to the login page from the Add Recipe button.
 
-* User Option - This button will replace the Login/Sign up buttons on the navbar once the user is logged in. when this button is clicked, the user will be 
+* **User Options** - This button will replace the Login/Sign up buttons on the navbar once the user is logged in. when this button is clicked, the user will be 
 presented with a dropdown list of three options: "My recipes", "Removed Recipes" and "Log out".
 
-* My Recipes button - This button works in much the same way as the categories dropdown, but the user will be presented with all the recipes they have 
+* **My Recipes button** - This button works in much the same way as the categories dropdown, but the user will be presented with all the recipes they have 
 created (if they have not been removed). From here they will be able to click on a card and view each recipe and the recipes will contain options at the
 bottom of the recipe to edit or remove the recipe.
 
-* Removed Recipes button  - This button works in the same way as the "My Recipes" button, but will display all recipes that the user has removed. If a recipe 
+* **Removed Recipes button**  - This button works in the same way as the "My Recipes" button, but will display all recipes that the user has removed. If a recipe 
 card is clicked on, the options at the bottom of the recipe will now show "Re-publish" and "Delete".
 
-* Log out - This button can be found on the navbar, user the user options, only for users who are logged in. This button will log the user out, meaning they 
+* **Log out** - This button can be found on the navbar, user the user options, only for users who are logged in. This button will log the user out, meaning they 
 will not be able to edit their recipes (if they have any) or create any new recipes.
 
 ## Features left to implement:
 
-* Auto hyperlink of tools in each recipe - If the tool is available on the tools page, the particlar tool will be hyperlinked to redirect the user to the 
+* **Auto hyperlink of tools in each recipe** - If the tool is available on the tools page, the particlar tool will be hyperlinked to redirect the user to the 
 external site that sells the tool.
 
-* Recipe voting - a voting system that will allow users to "like" the recipe, giving the creator some feedback on what users think of their recipes.
+* **Recipe voting** - a voting system that will allow users to "like" the recipe, giving the creator some feedback on what users think of their recipes.
 
 ## Technologies Used
 
@@ -92,41 +92,47 @@ HTML5
 
 CSS3
 
+JavaScript
+
+Python3
+
 Bootstrap
 https://getbootstrap.com/docs/4.4/getting-started/introduction/
 Bootstrap was used to speed up the development time and make use of their grid system for responsive mobile first design.
 
 Google fonts
 https://fonts.google.com/
-Google fonts was used to provide all the fonts for the site as they have a very large library of fonts
-
-JavaScript
+Google fonts was used to provide all the fonts for the site.
 
 JQuery
+https://jquery.com/
 The project uses JQuery to simplify DOM manipulation.
 
 FontAwesome
 https://fontawesome.com/icons?d=gallery
 
-Python3
-
 Flask
+https://flask.palletsprojects.com/en/1.1.x/quickstart/
 
 Pymongo
+https://api.mongodb.com/python/current/tutorial.html
 
 MongoDB/Atlas
+https://www.mongodb.com/
 
 Flask-Paginate
+https://pythonhosted.org/Flask-paginate/
 Flask-paginate was used to simplify the process of paginating the recipe results on the home page.
 
 werkzeug.security
+https://werkzeug.palletsprojects.com/en/1.0.x/utils/
 For password hashing
 
 ## Automated testing
 
 The automated test file can be found here: https://github.com/Matte-gtr/all_the_recipes/blob/master/tests.py
 For details on how to run the tests, please see below in deplayment *
-All tests contain docstrings for clear descriptions of what is being tested.
+All tests contain comments for clear descriptions of what is being tested.
 
 ## Manual Testing
 
@@ -160,34 +166,34 @@ users(user_name), while the recipes and categories collections are related by ca
 This project was Deployed using Heroku.
 
 To Clone the project from github, use:
-$ git clone https://github.com/Matte-gtr/all_the_recipes.git
+ `git clone https://github.com/Matte-gtr/all_the_recipes.git`
 
 I recommend deploying the project in a virtual envioronment:
-$ cd directory-name
-$ python3 -m venv virtual-env-name
+ `cd directory-name`
+ `python3 -m venv virtual-env-name`
 
 You will need to install the dependencies found in the requirements.txt file:
-$ pip3 install -r requirements.txt 
+ `pip3 install -r requirements.txt` 
 
 To run the project locally use:
-$ python3 app.py
+ `python3 app.py`
 
 You can also run the app through Heroku.
 https://all-the-recipes.herokuapp.com
 
 This will run the automated tesing file
-$python3 tests.py
+ `python3 tests.py`
 
 #### Credits
 Google Images - background images used across the site
-Freecodecame - examples and explanations of using multiple functions 
+Freecodecamp - examples and explanations of using multiple functions 
 w3schools - General learning material and descriptions
 Flask documentation - For information on flask functionality
 Stack Overflow - code snippets were taken and modified from here
 Lakeland.co.uk - Used as the chosen tool supplier, images were used from their website for the tools page
 
 #### Content
-All recipes - Some recipes were added to the site with images and information being taken from https://www.bbcgoodfood.com/recipes.
+BBC Good Food - Some recipes were added to the site with images and information being taken from https://www.bbcgoodfood.com/recipes.
 Lakeland - Images of tools and descriptions taken from https://www.lakeland.co.uk/.
 
 The inspiration for this site primarily came from https://www.oola.com/.
