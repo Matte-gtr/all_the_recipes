@@ -165,6 +165,12 @@ users(user_name), while the recipes and categories collections are related by ca
 ## Deployment
 This project was Deployed using Heroku.
 
+This was done by creating an app in Heroku, dowloading the Heroku CLI toolbelt, logging into Heroku from the CLI, initializing a git repository, 
+connecting git to heroku (`heroku git remote -a`), then adding all files to git (`git add .`), committing the data, then using 
+`git push heroku master` to push the files to the heroku app.
+
+MONGO_DBNAME, MONGO_URI, IP, PORT and SECRET_KEY have all been stored as environment variables which have not been pushed to Github and are set in Heroku.
+
 To Clone the project from github, use:
  `git clone https://github.com/Matte-gtr/all_the_recipes.git`
 
@@ -175,13 +181,16 @@ I recommend deploying the project in a virtual envioronment:
 You will need to install the dependencies found in the requirements.txt file:
  `pip3 install -r requirements.txt` 
 
+Ensure that the Procfile exists:
+ `echo web: python app.py > Procfile`
+
 To run the project locally use:
  `python3 app.py`
 
 You can also run the app through Heroku.
 https://all-the-recipes.herokuapp.com
 
-This will run the automated tesing file
+To run the automated tesing file use:
  `python3 tests.py`
 
 #### Credits
