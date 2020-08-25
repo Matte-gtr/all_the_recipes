@@ -204,5 +204,6 @@ Lakeland.co.uk - Used as the chosen tool supplier, images were used from their w
 #### Content
 BBC Good Food - Some recipes were added to the site with images and information being taken from https://www.bbcgoodfood.com/recipes.
 Lakeland - Images of tools and descriptions taken from https://www.lakeland.co.uk/.
+Tenor - gif loader
 
 The inspiration for this site primarily came from https://www.oola.com/.

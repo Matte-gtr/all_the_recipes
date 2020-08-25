@@ -286,6 +286,10 @@ body {
     height: 275px;
     overflow: hidden;
     border-radius: 10px;
+    background:url("/static/images/tenor.gif");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .card-image {
@@ -439,6 +443,10 @@ body {
 
 .img-container {
     position: relative;
+    background:url("/static/images/tenor.gif");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .view-recipe-img {
