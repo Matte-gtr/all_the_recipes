@@ -206,6 +206,11 @@ body {
     left: -40px;
 }
 
+.dropdown-menu {
+    max-height: 60vh;
+    overflow: auto;
+}
+
 .navbar-dark .navbar-nav .dark-text {
     color: #010101;
 }

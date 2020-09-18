@@ -45,7 +45,7 @@
                             <div class="image-container">
                                 <img class="card-image" src="{{ recipe.image_url }}" onerror="this.src='/static/images/ATR-default.jfif'" alt="{{ recipe.recipe_name }}">
                             </div>
-                            <div class="card-type">{{ recipe.category.upper() }} RECIPE</div>
+                            <div class="card-type">{{ recipe.category|upper() }} RECIPE</div>
                             <div class="heading-container">
                                 <h2 class="card-heading">{{ recipe.recipe_name.capitalize() }}</h2>
                             </div>
