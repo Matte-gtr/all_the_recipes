@@ -12,7 +12,7 @@
             <form action="{{ url_for('insert_recipe') }}" method="POST" class="atr-form">
                 <div class="form-group">
                     <label for="recipe_name">Category: </label>
-                    <select id="category" name="category" class="form-control">
+                    <select id="category" name="category" class="form-control" required>
                         <option value="" disabled selected>Choose Category</option>
                         {% for cat in cats %}
                             <option value="{{ cat.category_name }}">{{ cat.category_name.capitalize() }}</option>
